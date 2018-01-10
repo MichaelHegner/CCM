@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+
+
+	<int:channel id="quakeinfo.channel">
+  		<int:queue capacity="10"/>
+ 	</int:channel>
+
+	<int:channel id="quakeinfotrigger.channel"></int:channel> 
+
+	<int-http:outbound-gateway id="quakerHttpGateway"
+	     request-channel="quakeinfotrigger.channel"
+	     url="http://earthquake.usgs.gov/earthquakes/feed/geojson/all/hour"
+	     http-method="GET"
+	     expected-response-type="java.lang.String"
+	     charset="UTF-8"
+	     reply-timeout="5000"
+	     reply-channel="quakeinfo.channel">     
+	 </int-http:outbound-gateway>
+
+</beans>
