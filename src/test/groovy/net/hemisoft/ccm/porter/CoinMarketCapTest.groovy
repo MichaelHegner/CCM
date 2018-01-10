@@ -28,7 +28,24 @@ class CoinMarketCapTest {
 		def request = MessageBuilder.withPayload("").build()
 		coinmarketcapIncomeChannel.send(request)
 		def response = coinmarketcapinfoChannel.receive()		
-		assert response.getPayload() != null
+		
+		response.getPayload().forEach({
+			println it
+			assert it.coinId != null	
+			assert it.name != null
+			assert it.symbol != null
+			assert it.rank != null
+			assert it.priceUSD != null
+			assert it.priceBTC != null
+			assert it.volume24hUSD != null
+			assert it.marketCapUSD != null
+			assert it.availableSupply != null
+			assert it.totalSupply != null
+			assert it.changePercent1h != null
+			assert it.changePercent24h != null
+			assert it.changePercent7d != null
+			assert it.lastUpdate != null
+		})
 	}
 
 }
