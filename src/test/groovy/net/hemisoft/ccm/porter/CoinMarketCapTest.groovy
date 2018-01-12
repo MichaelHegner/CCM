@@ -20,7 +20,7 @@ class CoinMarketCapTest {
 	@Autowired @Qualifier("coinmarketcap.info.channel") 
 	PollableChannel coinmarketcapinfoChannel
 	
-	@Autowired @Qualifier("coinmarketcap.income.channel") 
+	@Autowired @Qualifier("coinmarketcap.subscribe.channel") 
 	MessageChannel coinmarketcapIncomeChannel
 	
 	@Test

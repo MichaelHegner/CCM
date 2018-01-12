@@ -14,12 +14,12 @@
 		<int:queue capacity="10" />
 	</int:channel>
 
-	<int:channel id="coinmarketcap.income.channel"></int:channel>
+	<int:publish-subscribe-channel id="coinmarketcap.subscribe.channel" />
 
 	<int-http:outbound-gateway id="coinmarketcapHttpGateway"
-		request-channel="coinmarketcap.income.channel" 
+		request-channel="coinmarketcap.subscribe.channel" 
 		url="https://api.coinmarketcap.com/v1/ticker/"
-		expected-response-type="net.hemisoft.ccm.domain.Coins"
+		expected-response-type="net.hemisoft.ccm.porter.Coins"
 		http-method="GET" 
 		reply-timeout="1000" 
 		charset="UTF-8"
