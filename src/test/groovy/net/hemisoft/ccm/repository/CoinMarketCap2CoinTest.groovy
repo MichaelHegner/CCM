@@ -1,5 +1,7 @@
 package net.hemisoft.ccm.repository;
 
+import java.time.LocalDateTime
+
 import org.junit.Before;
 import org.junit.Test;
 import org.nomin.NominMapper;
@@ -7,6 +9,7 @@ import org.nomin.core.Nomin;
 
 import net.hemisoft.ccm.domain.CoinsOnMarketPlace;
 import net.hemisoft.ccm.porter.Coin;
+import net.hemisoft.ccm.utils.DateUtils
 
 public class CoinMarketCap2CoinTest {
 	private static final String PACKAGE = "./net/hemisoft/ccm/repository/"
@@ -33,13 +36,14 @@ public class CoinMarketCap2CoinTest {
 		coin.changePercent1h	= 1.02;
 		coin.changePercent24h	= 4.03;
 		coin.changePercent7d	= -10.11;
-		coin.lastUpdate			= 1515791406;
+		coin.lastUpdateEpoch	= 1515791406;
 	}
   
 	
 	@Test
 	public void test() {
 		CoinsOnMarketPlace comp = nomin.map(coin, CoinsOnMarketPlace.class);
+
 		assert comp.coin.coinId			== coin.coinId
 		assert comp.coin.name			== coin.name
 		assert comp.coin.symbol			== coin.symbol
@@ -54,7 +58,9 @@ public class CoinMarketCap2CoinTest {
 		assert comp.changePercent1h		== coin.changePercent1h
 		assert comp.changePercent24h	== coin.changePercent24h
 		assert comp.changePercent7d		== coin.changePercent7d
-		assert comp.lastUpdate			== coin.lastUpdate
+		
+		LocalDateTime testLastUpdate = DateUtils.convertEpochMillis(coin.lastUpdateEpoch)
+		assert comp.lastUpdate			== testLastUpdate
 	}
 
 }

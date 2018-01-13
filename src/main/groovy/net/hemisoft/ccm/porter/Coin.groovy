@@ -20,5 +20,5 @@ class Coin {
 	@JsonProperty("percent_change_1h") 	Double 	changePercent1h
 	@JsonProperty("percent_change_24h") Double 	changePercent24h
 	@JsonProperty("percent_change_7d") 	Double 	changePercent7d
-	@JsonProperty("last_updated") 		Long 	lastUpdate
+	@JsonProperty("last_updated") 		Long 	lastUpdateEpoch
 }

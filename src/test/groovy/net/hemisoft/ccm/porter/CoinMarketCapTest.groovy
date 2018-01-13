@@ -30,7 +30,6 @@ class CoinMarketCapTest {
 		def response = coinmarketcapinfoChannel.receive()		
 		
 		response.getPayload().forEach({
-			println it
 			assert it.coinId != null	
 			assert it.name != null
 			assert it.symbol != null
@@ -44,7 +43,7 @@ class CoinMarketCapTest {
 			assert it.changePercent1h != null
 			assert it.changePercent24h != null
 			assert it.changePercent7d != null
-			assert it.lastUpdate != null
+			assert it.lastUpdateEpoch != null
 		})
 	}
 
