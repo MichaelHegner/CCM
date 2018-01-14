@@ -4,10 +4,10 @@ import java.time.ZoneId
 
 import net.hemisoft.ccm.utils.DateUtils
 
-import net.hemisoft.ccm.domain.CoinsOnMarketPlace
+import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.porter.Coin
 
-mappingFor a: CoinsOnMarketPlace, b: Coin
+mappingFor a: CoinOnMarketPlace, b: Coin
 introspector exploding 
 automap()
 

@@ -7,42 +7,28 @@ import org.junit.Test;
 import org.nomin.NominMapper;
 import org.nomin.core.Nomin;
 
-import net.hemisoft.ccm.domain.CoinsOnMarketPlace;
+import net.hemisoft.ccm.domain.CoinOnMarketPlace;
+import net.hemisoft.ccm.domain.key.ResourcePath
 import net.hemisoft.ccm.porter.Coin;
+import net.hemisoft.ccm.stub.CoinStub
 import net.hemisoft.ccm.utils.DateUtils
 
 public class CoinMarketCap2CoinTest {
-	private static final String PACKAGE = "./net/hemisoft/ccm/repository/"
+	NominMapper nomin = new Nomin(ResourcePath.PACKAGE + "coinmarketcap2coin.groovy");
 	
-	NominMapper nomin = new Nomin(PACKAGE + "coinmarketcap2coin.groovy");
 	Coin coin;
-	CoinsOnMarketPlace comp;
+	CoinOnMarketPlace comp;
 	
 	@Before
 	public void before() {
-		comp = new CoinsOnMarketPlace();
-		coin = new Coin();
-		coin.coinId				= "BTC"
-		coin.name				= "Bitcoin"
-		coin.symbol				= "(B)"
-		coin.rank				= 1
-		coin.priceUSD 			= 1.0
-		coin.priceBTC			= 0.01
-		coin.volume24hUSD		= 1_000_000;
-		coin.marketCapUSD		= 1_000_000;
-		coin.availableSupply	= 500_000;
-		coin.totalSupply		= 800_000;
-		coin.maxSupply			= 2_000_000;
-		coin.changePercent1h	= 1.02;
-		coin.changePercent24h	= 4.03;
-		coin.changePercent7d	= -10.11;
-		coin.lastUpdateEpoch	= 1515791406;
+		comp = new CoinOnMarketPlace();
+		coin = CoinStub.create()
 	}
   
 	
 	@Test
 	public void test() {
-		CoinsOnMarketPlace comp = nomin.map(coin, CoinsOnMarketPlace.class);
+		CoinOnMarketPlace comp = nomin.map(coin, CoinOnMarketPlace.class);
 
 		assert comp.coin.coinId			== coin.coinId
 		assert comp.coin.name			== coin.name

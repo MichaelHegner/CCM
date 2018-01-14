@@ -9,14 +9,20 @@
 		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<import resource="restapi.xml"/>
-	
-	<int:bridge input-channel="coinmarketcap.income.channel" 
-				output-channel="coinmarketcap.response.channel"
-	>
-		<int:poller fixed-rate="1000" />
-	</int:bridge>
-	
-	<import resource="splitter.xml"/>
+	<int:channel id="coinmarketcap.request.channel" />
+
+	<int-http:outbound-gateway id="coinmarketcapHttpGateway"
+		request-channel="coinmarketcap.request.channel" 
+		url="https://api.coinmarketcap.com/v1/ticker/"
+		expected-response-type="net.hemisoft.ccm.porter.Coins"
+		http-method="GET" 
+		reply-timeout="1000" 
+		charset="UTF-8"
+		reply-channel="coinmarketcap.income.channel"
+	/>
+
+	<int:channel id="coinmarketcap.income.channel">
+		<int:queue capacity="1000"/>
+	</int:channel>
 
 </beans>

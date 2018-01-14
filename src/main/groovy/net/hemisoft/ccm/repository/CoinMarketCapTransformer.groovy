@@ -1,19 +1,20 @@
 package net.hemisoft.ccm.repository
 
-import net.hemisoft.ccm.domain.CoinsOnMarketPlace
+import org.nomin.NominMapper
+import org.nomin.core.Nomin
+
+import net.hemisoft.ccm.domain.CoinOnMarketPlace
+import net.hemisoft.ccm.domain.key.ResourcePath
 import net.hemisoft.ccm.porter.Coin
-import net.hemisoft.ccm.porter.Coins
 
 class CoinMarketCapTransformer {
-
-	public CoinsOnMarketPlace transform(Coins marketPlaceCoins) {
-		List<CoinsOnMarketPlace> marketPlaceRows = {}
-		marketPlaceCoins.each { coin -> marketPlaceRows.add( transformInternal( coin ) ) }
-		marketPlaceRows
+	NominMapper nomin = new Nomin(ResourcePath.PACKAGE + "coinmarketcap2coin.groovy");
+	
+	CoinOnMarketPlace transform(Coin coin) {
+		nomin.map(coin, CoinOnMarketPlace.class);
 	}
 	
-	private CoinsOnMarketPlace transformInternal(Coin coin) {
-//		Coin coin 
+	Coin transform(CoinOnMarketPlace comp) {
+		nomin.map(comp, Coin.class);
 	}
-	
 }

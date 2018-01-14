@@ -8,7 +8,7 @@ import javax.persistence.Id
 import javax.persistence.ManyToOne
 
 @Entity
-class CoinsOnMarketPlace {
+class CoinOnMarketPlace {
 	@Id @GeneratedValue	Long 			id
 	@ManyToOne			Coin 			coin
 	@ManyToOne			MarketPlace 	marketPlace
