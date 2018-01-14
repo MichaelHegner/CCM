@@ -13,11 +13,11 @@
 
 	<int:transformer id="coinMarketCapTransformer" ref="coinMarketCapTransformerBean" 
 		input-channel="coinmarketcap.subscribe.channel"
-        output-channel="repository.income.channel"
+        output-channel="coinmarketcap.transformation.outcome.channel"
         method="transform" 
     />
     
-    <int:channel id="repository.income.channel">
+    <int:channel id="coinmarketcap.transformation.outcome.channel">
     	<int:queue capacity="1000"/>
     </int:channel>
     

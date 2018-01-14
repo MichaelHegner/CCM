@@ -20,12 +20,12 @@ import net.hemisoft.ccm.stub.CoinStub;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ContextConfiguration(locations= {"../porter/porterapi.xml", "coinmarketcap.xml"})
+@ContextConfiguration(locations= {"../porter/porterapi.xml", "flow/_coinmarketcap.xml"})
 public class CoinMarketCap2CoinTransformerTest {
 	@Autowired @Qualifier("coinmarketcap.subscribe.channel")
 	PublishSubscribeChannel subscribeChannel;
 	
-	@Autowired @Qualifier("repository.income.channel")
+	@Autowired @Qualifier("coinmarketcap.transformation.outcome.channel")
 	PollableChannel incomeChannel;
 	
 	@Test
