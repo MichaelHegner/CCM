@@ -18,7 +18,7 @@ class CoinStub {
 	static final BigDecimal 	CHANGE_PERCENT_1H 	= 1.02
 	static final BigDecimal 	CHANGE_PERCENT_24H 	= 4.03
 	static final BigDecimal 	CHANGE_PERCENT_7D 	= -10.11
-	static final BigDecimal 	LAST_UPDATE_EPOCH 	= 1515791406
+	static final Long 			LAST_UPDATE_EPOCH 	= 1515791406
 	
 	static Coin create() {
 		Coin coin = new Coin()
@@ -40,7 +40,7 @@ class CoinStub {
 		coin
 	} 
 	
-	static void assertCoinAttributeValues(Coin coin) {
+	static void assertAttributeValues(Coin coin) {
 		assert coin.coinId 				== COIN_ID
 		assert coin.name 				== NAME
 		assert coin.symbol 				== SYMBOL

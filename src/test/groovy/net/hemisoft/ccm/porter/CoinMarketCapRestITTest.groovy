@@ -17,7 +17,7 @@ import net.hemisoft.ccm.stub.CoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
-@ContextConfiguration("restapi.xml")
+@ContextConfiguration("flow/_restapi.xml")
 class CoinMarketCapRestITTest {
 	@Autowired @Qualifier("coinmarketcap.request.channel") 
 	MessageChannel requestChannel

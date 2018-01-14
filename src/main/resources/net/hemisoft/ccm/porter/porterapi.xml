@@ -9,15 +9,10 @@
 		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<int:channel id="coinmarketcap.response.channel" />
-
-	<bean id="coins2CoinSplitter" class="net.hemisoft.ccm.porter.Coins2CoinSplitter" />
-
-	<int:splitter ref="coins2CoinSplitter" method="splitMessage"
-		input-channel="coinmarketcap.response.channel"
-		output-channel="coinmarketcap.subscribe.channel" 
-	/>
-
+	<import resource="flow/porter.xml" />
+	
+	<int:bridge input-channel="coinmarketcap.output.channel" output-channel="coinmarketcap.subscribe.channel" />
+	
 	<int:publish-subscribe-channel id="coinmarketcap.subscribe.channel" />
 
 </beans>

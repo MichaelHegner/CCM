@@ -27,13 +27,13 @@ import net.hemisoft.ccm.stub.CoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
-@ContextConfiguration("splitter.xml")
+@ContextConfiguration("flow/_splitter.xml")
 class CoinMarketCapSplitterTest {
 	@Autowired @Qualifier("coinmarketcap.response.channel") 
 	DirectChannel incomeChannel
 	
-	@Autowired @Qualifier("coinmarketcap.subscribe.channel") 
-	PublishSubscribeChannel subscribeChannel
+	@Autowired @Qualifier("coinmarketcap.output.channel") 
+	DirectChannel outputChannel
 	
 	Coins coins
 	
@@ -49,7 +49,7 @@ class CoinMarketCapSplitterTest {
 		AtomicReference<Message<?>> messageReference = new AtomicReference<>()
 		CountDownLatch latch = new CountDownLatch(1)
 		
-		assert true == subscribeChannel.subscribe(new MessageHandler() {
+		assert true == outputChannel.subscribe(new MessageHandler() {
 			void handleMessage(Message<?> message) throws MessagingException {
 				messageReference.set message
 				latch.countDown()
@@ -64,6 +64,6 @@ class CoinMarketCapSplitterTest {
 		def response = responseMessage.getPayload()
 		assert response != null
 		assert response.getClass() == Coin
-		CoinStub.assertCoinAttributeValues response
+		CoinStub.assertAttributeValues response
 	}
 }

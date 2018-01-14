@@ -9,11 +9,16 @@
 		http://www.springframework.org/schema/integration/jpa http://www.springframework.org/schema/integration/jpa/spring-integration-jpa-5.0.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
 
-	<import resource="../porter/porter.xml" />
-	<import resource="coinmarketcap.xml" />
-	
-    <int:channel id="repository.income.channel">
-    	<int:queue capacity="1000" />
-    </int:channel>
+	<bean id="coinMarketCapTransformerBean" class="net.hemisoft.ccm.repository.CoinMarketCapTransformer" />
 
+	<int:transformer id="coinMarketCapTransformer" ref="coinMarketCapTransformerBean" 
+		input-channel="coinmarketcap.subscribe.channel"
+        output-channel="repository.income.channel"
+        method="transform" 
+    />
+    
+    <int:channel id="repository.income.channel">
+    	<int:queue capacity="1000"/>
+    </int:channel>
+    
 </beans>

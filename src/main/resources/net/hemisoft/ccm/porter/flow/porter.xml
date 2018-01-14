@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<import resource="restapi.xml"/>
+	<import resource="_restapi.xml"/>
 	
 	<int:bridge input-channel="coinmarketcap.income.channel" 
 				output-channel="coinmarketcap.response.channel"
@@ -17,6 +17,6 @@
 		<int:poller fixed-rate="1000" />
 	</int:bridge>
 	
-	<import resource="splitter.xml"/>
+	<import resource="_splitter.xml"/>
 
 </beans>

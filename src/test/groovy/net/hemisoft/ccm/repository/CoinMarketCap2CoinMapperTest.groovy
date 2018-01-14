@@ -13,7 +13,7 @@ import net.hemisoft.ccm.porter.Coin;
 import net.hemisoft.ccm.stub.CoinStub
 import net.hemisoft.ccm.utils.DateUtils
 
-public class CoinMarketCap2CoinTest {
+public class CoinMarketCap2CoinMapperTest {
 	NominMapper nomin = new Nomin(ResourcePath.PACKAGE + "coinmarketcap2coin.groovy");
 	
 	Coin coin;
