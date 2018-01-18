@@ -1,14 +1,13 @@
 package net.hemisoft.ccm.repository
 
-import org.nomin.NominMapper
 import org.nomin.core.Nomin
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
-import net.hemisoft.ccm.domain.key.ResourcePath
+import net.hemisoft.ccm.domain.key.ResourceUtils
 import net.hemisoft.ccm.porter.Coin
 
 class CoinMarketCapTransformer {
-	NominMapper nomin = new Nomin(ResourcePath.PACKAGE + "coinmarketcap2coin.groovy");
+	def nomin = new Nomin(ResourceUtils.getMapperResource())
 	
 	CoinOnMarketPlace transform(Coin coin) {
 		nomin.map(coin, CoinOnMarketPlace.class);

@@ -8,13 +8,13 @@ import org.nomin.NominMapper;
 import org.nomin.core.Nomin;
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace;
-import net.hemisoft.ccm.domain.key.ResourcePath
+import net.hemisoft.ccm.domain.key.ResourceUtils
 import net.hemisoft.ccm.porter.Coin;
 import net.hemisoft.ccm.stub.BitCoinStub
 import net.hemisoft.ccm.utils.DateUtils
 
 public class CoinMarketCap2CoinMapperTest {
-	NominMapper nomin = new Nomin(ResourcePath.PACKAGE + "coinmarketcap2coin.groovy");
+	NominMapper nomin = new Nomin(ResourceUtils.getMapperResource());
 	
 	Coin coin;
 	CoinOnMarketPlace comp;
