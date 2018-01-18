@@ -9,15 +9,19 @@
 		http://www.springframework.org/schema/integration/jpa http://www.springframework.org/schema/integration/jpa/spring-integration-jpa-5.0.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
 
-	<import resource="_coinmarketcap.xml" />
-
     <int:channel id="repository.income.channel">
     	<int:queue capacity="1000" />
     </int:channel>
     
+<!--     <bean id="coinTransformer" class="net.hemisoft.ccm.repository.CoinTransformer" /> -->
+<!--     <int:transformer id="coinTransformer" ref="coinTransformer" method="transform"/> -->
+    
     <int-jpa:outbound-channel-adapter channel="repository.income.channel"
     	entity-class="net.hemisoft.ccm.domain.CoinOnMarketPlace"
-    	entity-manager="em"
-    />
+    	entity-manager-factory="entityManagerFactory"
+    >
+    	<int:poller fixed-rate="1000" />
+    	<int-jpa:transactional/>
+    </int-jpa:outbound-channel-adapter>
 
 </beans>

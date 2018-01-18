@@ -21,7 +21,7 @@ import org.springframework.messaging.MessagingException
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
-import net.hemisoft.ccm.stub.CoinStub
+import net.hemisoft.ccm.stub.BitCoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
@@ -51,7 +51,7 @@ class CoinMarketCapPorterITTest {
 		
 		latch.await 10, SECONDS
 		assert responseCoins != null
-		CoinStub.assertCoinAttributeValuesNotNull responseCoins[0]
+		BitCoinStub.assertCoinAttributeValuesNotNull responseCoins[0]
 		
 		responseCoins.each{ println it}
 	}

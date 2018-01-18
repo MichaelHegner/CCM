@@ -10,7 +10,7 @@ import org.nomin.core.Nomin;
 import net.hemisoft.ccm.domain.CoinOnMarketPlace;
 import net.hemisoft.ccm.domain.key.ResourcePath
 import net.hemisoft.ccm.porter.Coin;
-import net.hemisoft.ccm.stub.CoinStub
+import net.hemisoft.ccm.stub.BitCoinStub
 import net.hemisoft.ccm.utils.DateUtils
 
 public class CoinMarketCap2CoinMapperTest {
@@ -22,7 +22,7 @@ public class CoinMarketCap2CoinMapperTest {
 	@Before
 	public void before() {
 		comp = new CoinOnMarketPlace();
-		coin = CoinStub.create()
+		coin = BitCoinStub.create()
 	}
   
 	

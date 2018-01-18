@@ -11,6 +11,6 @@
 
 	<import resource="../porter/porter.xml" />
 	<import resource="flow/_coinmarketcap.xml" />
-	<import resource="flow/repository.xml"
+	<import resource="flow/repository.xml" />
 
 </beans>

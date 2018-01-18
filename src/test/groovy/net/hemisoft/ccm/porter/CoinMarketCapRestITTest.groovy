@@ -13,7 +13,7 @@ import org.springframework.messaging.PollableChannel
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
-import net.hemisoft.ccm.stub.CoinStub
+import net.hemisoft.ccm.stub.BitCoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
@@ -38,7 +38,7 @@ class CoinMarketCapRestITTest {
 		assert responseGetPayload.getClass() == Coins
 		assert responseGetPayload.size() > 0
 		
-		responseGetPayload.forEach({ if(it.rank == 1) CoinStub.assertCoinAttributeValuesNotNull(it) })
+		responseGetPayload.forEach({ if(it.rank == 1) BitCoinStub.assertCoinAttributeValuesNotNull(it) })
 	}
 
 }

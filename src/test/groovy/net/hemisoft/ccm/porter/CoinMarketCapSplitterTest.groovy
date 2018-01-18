@@ -23,7 +23,7 @@ import org.springframework.messaging.support.MessageBuilder
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
-import net.hemisoft.ccm.stub.CoinStub
+import net.hemisoft.ccm.stub.BitCoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
@@ -40,7 +40,7 @@ class CoinMarketCapSplitterTest {
 	@Before
 	public void before() {
 		coins = new Coins();
-		Coin coin = CoinStub.create()
+		Coin coin = BitCoinStub.create()
 		coins.add coin
 	}
 	
@@ -64,6 +64,6 @@ class CoinMarketCapSplitterTest {
 		def response = responseMessage.getPayload()
 		assert response != null
 		assert response.getClass() == Coin
-		CoinStub.assertAttributeValues response
+		BitCoinStub.assertAttributeValues response
 	}
 }
