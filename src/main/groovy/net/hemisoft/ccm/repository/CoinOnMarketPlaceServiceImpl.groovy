@@ -16,7 +16,7 @@ class CoinOnMarketPlaceServiceImpl implements CoinOnMarketPlaceService {
 	@Autowired MarketPlaceRepository marketRepository
 	@Autowired CoinsOnMarketPlaceRepository coinsOnMarketPlaceRepository;
 	
-	CoinOnMarketPlace save(CoinOnMarketPlace comp) {
+	void save(CoinOnMarketPlace comp) {
 		def dbCompCoin = coinRepository.findByCoinIdAndName comp.coin.coinId, comp.coin.name
 		
 		if(null != dbCompCoin) {
