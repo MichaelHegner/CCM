@@ -3,6 +3,7 @@ package net.hemisoft.ccm.stub
 import net.hemisoft.ccm.porter.Coin
 
 class BitCoinStub {
+	static final String			MARKET_PLACE_NAME	= "coinMarketCap"
 	static final String 		COIN_ID				= "bitcoin"
 	static final String 		NAME 				= "Bitcoin"
 	static final String 		SYMBOL 				= "BTC"

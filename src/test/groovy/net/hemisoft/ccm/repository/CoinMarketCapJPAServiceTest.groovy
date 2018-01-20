@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Transactional
 
+import net.hemisoft.ccm.domain.MarketPlace
+
 
 /**
  * This test class tests the hibernate configuration. It tests the behavior of the CRUD methods
@@ -34,12 +36,11 @@ class CoinMarketCapJPAServiceTest {
 		assert comps != null
 		assert comps.size() == 1
 		
-		def compResult = comps.get(0)
 		assert comps.get(0) == comp
 	}
 	
 	@Test
-	public void testInsert_ifTwoDifferentCoinsInChannel_thenInsertBothCoins() {
+	public void testInsert_ifTwoDifferentCoinsFromSameMarketInChannel_thenInsertBothCoins() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def ethComp = CoinOnMarketPlaceStub.createEthereumCoin()
 		service.save(bitComp)
@@ -54,7 +55,7 @@ class CoinMarketCapJPAServiceTest {
 	}
 	
 	@Test
-	public void testInsert_ifTwoSameCoinsInChannel_thenUpdateCoin() {
+	public void testInsert_ifTwoSameCoinsFromSameMarketInChannel_thenUpdateCoin() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin()
 		bitComp2.setLastUpdate(bitComp2.lastUpdate.plusSeconds(10))
@@ -65,7 +66,35 @@ class CoinMarketCapJPAServiceTest {
 		assert comps != null
 		assert comps.size() == 1
 		
-		def compResult = comps.get(0)
 		assertThat(comps).containsExactly(bitComp2)
+	}
+	
+	
+	@Test
+	public void testInsert_ifTwoDifferentCoinsFromDifferentMarketsInChannel_thenInsertBothCoins() {
+		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
+		def ethComp = CoinOnMarketPlaceStub.createEthereumCoin()
+		service.save(bitComp)
+		service.save(ethComp)
+		
+		def comps = service.findAll()
+		assert comps != null
+		assert comps.size() == 2
+		
+		assertThat(comps).containsExactly(bitComp, ethComp)
+	}
+	
+	@Test
+	public void testInsert_ifTwoSameCoinsFromDifferentMarketsInChannel_thenInsertBothCoins() {
+		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
+		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin(MarketPlace.newInstance(name: "AnyMarketPlace"))
+		service.save(bitComp)
+		service.save(bitComp2)
+		
+		def comps = service.findAll()
+		assert comps != null
+		assert comps.size() == 2
+		
+		assertThat(comps).containsExactly(bitComp, bitComp2)
 	}
 }

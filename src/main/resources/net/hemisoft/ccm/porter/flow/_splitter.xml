@@ -13,10 +13,12 @@
 
 	<bean id="coins2CoinSplitter" class="net.hemisoft.ccm.porter.Coins2CoinSplitter" />
 
-	<int:splitter ref="coins2CoinSplitter" method="splitMessage"
-		input-channel="coinmarketcap.response.channel"
-		output-channel="coinmarketcap.output.channel" 
-	/>
+	<int:chain input-channel="coinmarketcap.response.channel" output-channel="coinmarketcap.output.channel">
+		<int:splitter ref="coins2CoinSplitter" method="splitMessage" />
+		<int:header-enricher>
+			<int:header name="marketName" value="coinMarketCap" />
+		</int:header-enricher>
+	</int:chain>
 
 	<int:channel id="coinmarketcap.output.channel" />
 

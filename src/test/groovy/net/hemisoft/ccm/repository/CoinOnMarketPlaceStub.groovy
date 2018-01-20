@@ -1,21 +1,21 @@
 package net.hemisoft.ccm.repository;
 
-import java.time.LocalDateTime
-
 import net.hemisoft.ccm.domain.Coin
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
+import net.hemisoft.ccm.domain.MarketPlace
 import net.hemisoft.ccm.stub.BitCoinStub
 import net.hemisoft.ccm.stub.EthereumCoinStub
 import net.hemisoft.ccm.utils.DateUtils
 
 class CoinOnMarketPlaceStub {
 	
-//	static CoinOnMarketPlace createBitCoin() {
-//	}
-//	
 	static CoinOnMarketPlace createBitCoin() {
-		def newInstance = Coin.newInstance()
-		CoinOnMarketPlace comp = CoinOnMarketPlace.newInstance(coin: newInstance)
+		createBitCoin(MarketPlace.newInstance(name: "coinMarketCap"))
+	}
+	
+	static CoinOnMarketPlace createBitCoin(MarketPlace marketPlace) {
+		def coin = Coin.newInstance()
+		CoinOnMarketPlace comp = CoinOnMarketPlace.newInstance(coin: coin, marketPlace: marketPlace)
 		comp.coin.coinId 				= BitCoinStub.COIN_ID
 		comp.coin.name 					= BitCoinStub.NAME
 		comp.coin.symbol 				= BitCoinStub.SYMBOL
@@ -35,6 +35,7 @@ class CoinOnMarketPlaceStub {
 	}
 	
 	static void assertBitcoinValues(CoinOnMarketPlace comp) {
+		assert comp.marketPlace.name	== BitCoinStub.MARKET_PLACE_NAME
 		assert comp.coin.coinId 		== BitCoinStub.COIN_ID
 		assert comp.coin.name 			== BitCoinStub.NAME
 		assert comp.coin.symbol 		== BitCoinStub.SYMBOL
@@ -54,8 +55,12 @@ class CoinOnMarketPlaceStub {
 	
 	
 	static CoinOnMarketPlace createEthereumCoin() {
-		def newInstance = Coin.newInstance()
-		CoinOnMarketPlace comp = CoinOnMarketPlace.newInstance(coin: newInstance)
+		createEthereumCoin(MarketPlace.newInstance(name: "coinMarketCap"))
+	}
+
+	static CoinOnMarketPlace createEthereumCoin(def marketPlace) {
+		def coin = Coin.newInstance()
+		CoinOnMarketPlace comp = CoinOnMarketPlace.newInstance(coin: coin, marketPlace: marketPlace)
 		comp.coin.coinId 				= EthereumCoinStub.COIN_ID
 		comp.coin.name 					= EthereumCoinStub.NAME
 		comp.coin.symbol 				= EthereumCoinStub.SYMBOL
@@ -75,6 +80,7 @@ class CoinOnMarketPlaceStub {
 	}
 	
 	static void assertEthereumValues(CoinOnMarketPlace comp) {
+		assert comp.marketPlace.name	== EthereumCoinStub.MARKET_PLACE_NAME
 		assert comp.coin.coinId 		== EthereumCoinStub.COIN_ID
 		assert comp.coin.name 			== EthereumCoinStub.NAME
 		assert comp.coin.symbol 		== EthereumCoinStub.SYMBOL

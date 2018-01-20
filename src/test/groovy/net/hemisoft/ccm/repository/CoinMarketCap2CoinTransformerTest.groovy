@@ -31,7 +31,7 @@ public class CoinMarketCap2CoinTransformerTest {
 	@Test
 	public void test() {
 		Coin coin = BitCoinStub.create()
-		def request = MessageBuilder.withPayload(coin).build()
+		def request = MessageBuilder.withPayload(coin).setHeader("marketName", "coinMarketCap").build()
 		assert subscribeChannel.send(request) == true
 		
 		def responseMessage = incomeChannel.receive(2000)

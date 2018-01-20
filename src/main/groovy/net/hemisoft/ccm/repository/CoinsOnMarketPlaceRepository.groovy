@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository
 
 import net.hemisoft.ccm.domain.Coin
 import net.hemisoft.ccm.domain.CoinOnMarketPlace;
+import net.hemisoft.ccm.domain.MarketPlace
 
 @Repository
 public interface CoinsOnMarketPlaceRepository extends JpaRepository<CoinOnMarketPlace, Long> {
-	CoinOnMarketPlace findByCoin(Coin coin)
+	CoinOnMarketPlace findByCoinAndMarketPlace(Coin coin, MarketPlace marketPlace)
 }

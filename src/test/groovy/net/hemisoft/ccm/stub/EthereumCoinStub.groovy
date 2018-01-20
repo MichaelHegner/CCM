@@ -3,6 +3,7 @@ package net.hemisoft.ccm.stub
 import net.hemisoft.ccm.porter.Coin
 
 class EthereumCoinStub {
+	static final String			MARKET_PLACE_NAME	= "coinMarketPlace"
 	static final String 		COIN_ID				= "ethereum"
 	static final String 		NAME 				= "Ethereum"
 	static final String 		SYMBOL 				= "ETH"

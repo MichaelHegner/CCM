@@ -1,10 +1,9 @@
 package net.hemisoft.ccm.repository
 
-import java.util.stream.Stream
-
 import javax.transaction.Transactional
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.messaging.handler.annotation.Header
 import org.springframework.stereotype.Service
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
@@ -12,23 +11,28 @@ import net.hemisoft.ccm.domain.CoinOnMarketPlace
 @Service
 @Transactional
 class CoinOnMarketPlaceServiceImpl implements CoinOnMarketPlaceService {
-	@Autowired CoinRepository coinRepository
-	@Autowired MarketPlaceRepository marketRepository
+	@Autowired CoinRepository 				coinRepository
+	@Autowired MarketPlaceRepository 		marketRepository
 	@Autowired CoinsOnMarketPlaceRepository coinsOnMarketPlaceRepository;
 	
 	void save(CoinOnMarketPlace comp) {
 		def dbCompCoin = coinRepository.findByCoinIdAndName comp.coin.coinId, comp.coin.name
-		
 		if(null != dbCompCoin) {
 			comp.coin = dbCompCoin
+		}
 
-			def dbComp = coinsOnMarketPlaceRepository.findByCoin(dbCompCoin)
-			
+		def dbMarketPlace = marketRepository.findByName comp.marketPlace.name
+		if(null != dbMarketPlace) {
+			comp.marketPlace = dbMarketPlace
+		}
+
+		if(dbCompCoin && dbMarketPlace) {
+			def dbComp = coinsOnMarketPlaceRepository.findByCoinAndMarketPlace(dbCompCoin, dbMarketPlace)
 			if(null != dbComp) {
 				comp.id = dbComp.id
 			}
-		}
-		
+		}	
+					
 		coinsOnMarketPlaceRepository.save comp
 	}
 
