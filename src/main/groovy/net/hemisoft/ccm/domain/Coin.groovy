@@ -31,7 +31,6 @@ public class Coin {
 	String 	coinId;
 	String 	name;
 	String 	symbol;
-	Integer rank; // TODO: Move to CoinOnMarketPlace
 	
 	@Column(name = "created_date", nullable = false, updatable = false)
 	@CreatedDate

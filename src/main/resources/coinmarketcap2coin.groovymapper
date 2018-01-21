@@ -14,7 +14,6 @@ automap()
 a.coin.coinId		=		b.coinId
 a.coin.name			=		b.name
 a.coin.symbol		=		b.symbol
-a.coin.rank			=		b.rank
 
 a.lastUpdate		= 		b.lastUpdateEpoch
 convert to_a: { lastUpdateEpoch -> DateUtils.convertEpochMillis(lastUpdateEpoch) }

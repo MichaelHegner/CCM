@@ -33,7 +33,7 @@ public class CoinMarketCap2CoinMapperTest {
 		assert comp.coin.coinId			== coin.coinId
 		assert comp.coin.name			== coin.name
 		assert comp.coin.symbol			== coin.symbol
-		assert comp.coin.rank			== coin.rank
+		assert comp.rank				== coin.rank
 		assert comp.priceUSD			== coin.priceUSD
 		assert comp.priceBTC			== coin.priceBTC
 		assert comp.volume24hUSD		== coin.volume24hUSD

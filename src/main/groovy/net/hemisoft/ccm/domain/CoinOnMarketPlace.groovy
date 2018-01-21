@@ -42,6 +42,7 @@ class CoinOnMarketPlace {
 		optional = false
 	)							MarketPlace 	marketPlace
 	
+	@Column(nullable = false)	BigInteger 		rank;
 	@Column(nullable = false)	BigDecimal		priceUSD
 	@Column(nullable = false)	BigDecimal		priceBTC
 	@Column(nullable = false)	BigDecimal		volume24hUSD
@@ -54,11 +55,12 @@ class CoinOnMarketPlace {
 	@Column(nullable = false)	BigDecimal 		changePercent7d
 	@Column(nullable = false)	LocalDateTime 	lastUpdate	
 	
-	@Column(name = "created_date", nullable = false, updatable = false)
-	@CreatedDate
-	private long createdDate;
+	@Column(name = "created_date", 
+		nullable = false, 
+		updatable = false
+	)
+	@CreatedDate				long 			createdDate;
  
 	@Column(name = "modified_date")
-	@LastModifiedDate
-	private long modifiedDate;
+	@LastModifiedDate			long 			modifiedDate;
 }

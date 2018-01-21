@@ -19,7 +19,7 @@ class CoinOnMarketPlaceStub {
 		comp.coin.coinId 				= BitCoinStub.COIN_ID
 		comp.coin.name 					= BitCoinStub.NAME
 		comp.coin.symbol 				= BitCoinStub.SYMBOL
-		comp.coin.rank 					= BitCoinStub.RANK
+		comp.rank 						= BitCoinStub.RANK
 		comp.priceUSD 					= BitCoinStub.PRICE_USD
 		comp.priceBTC 					= BitCoinStub.PRICE_BTC
 		comp.volume24hUSD 				= BitCoinStub.VOLUME_24H_USD
@@ -39,7 +39,7 @@ class CoinOnMarketPlaceStub {
 		assert comp.coin.coinId 		== BitCoinStub.COIN_ID
 		assert comp.coin.name 			== BitCoinStub.NAME
 		assert comp.coin.symbol 		== BitCoinStub.SYMBOL
-		assert comp.coin.rank 			== BitCoinStub.RANK
+		assert comp.rank 				== BitCoinStub.RANK
 		assert comp.priceUSD 			== BitCoinStub.PRICE_USD
 		assert comp.priceBTC 			== BitCoinStub.PRICE_BTC
 		assert comp.volume24hUSD 		== BitCoinStub.VOLUME_24H_USD
@@ -64,7 +64,7 @@ class CoinOnMarketPlaceStub {
 		comp.coin.coinId 				= EthereumCoinStub.COIN_ID
 		comp.coin.name 					= EthereumCoinStub.NAME
 		comp.coin.symbol 				= EthereumCoinStub.SYMBOL
-		comp.coin.rank 					= EthereumCoinStub.RANK
+		comp.rank 						= EthereumCoinStub.RANK
 		comp.priceUSD 					= EthereumCoinStub.PRICE_USD
 		comp.priceBTC 					= EthereumCoinStub.PRICE_BTC
 		comp.volume24hUSD 				= EthereumCoinStub.VOLUME_24H_USD
@@ -84,7 +84,7 @@ class CoinOnMarketPlaceStub {
 		assert comp.coin.coinId 		== EthereumCoinStub.COIN_ID
 		assert comp.coin.name 			== EthereumCoinStub.NAME
 		assert comp.coin.symbol 		== EthereumCoinStub.SYMBOL
-		assert comp.coin.rank 			== EthereumCoinStub.RANK
+		assert comp.rank 				== EthereumCoinStub.RANK
 		assert comp.priceUSD 			== EthereumCoinStub.PRICE_USD
 		assert comp.priceBTC 			== EthereumCoinStub.PRICE_BTC
 		assert comp.volume24hUSD 		== EthereumCoinStub.VOLUME_24H_USD
