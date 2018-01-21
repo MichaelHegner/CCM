@@ -9,13 +9,8 @@
 		http://www.springframework.org/schema/integration/jpa http://www.springframework.org/schema/integration/jpa/spring-integration-jpa-5.0.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
 
-    <int:channel id="repository.income.channel" datatype="net.hemisoft.ccm.domain.CoinOnMarketPlace">
-    	<int:queue capacity="1000" />
-    </int:channel>
+    <int:channel id="repository.income.channel" datatype="net.hemisoft.ccm.domain.CoinOnMarketPlace" />
     
-    <bean id="coinOnMarketPlaceService" class="net.hemisoft.ccm.repository.CoinOnMarketPlaceServiceImpl" />
-    <int:service-activator input-channel="repository.income.channel" ref="coinOnMarketPlaceService" method="save">
-    	<int:poller fixed-rate="1000" />
-    </int:service-activator>
+    <int:service-activator input-channel="repository.income.channel" ref="coinOnMarketPlaceServiceImpl" method="save" />
     
 </beans>
