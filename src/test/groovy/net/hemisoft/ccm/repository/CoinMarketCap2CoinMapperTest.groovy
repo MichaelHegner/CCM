@@ -8,10 +8,10 @@ import org.nomin.NominMapper;
 import org.nomin.core.Nomin;
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace;
-import net.hemisoft.ccm.domain.key.ResourceUtils
 import net.hemisoft.ccm.porter.Coin;
 import net.hemisoft.ccm.stub.BitCoinStub
 import net.hemisoft.ccm.utils.DateUtils
+import net.hemisoft.ccm.utils.ResourceUtils
 
 public class CoinMarketCap2CoinMapperTest {
 	NominMapper nomin = new Nomin(ResourceUtils.getMapperResource());

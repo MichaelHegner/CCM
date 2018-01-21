@@ -5,8 +5,8 @@ import org.springframework.messaging.handler.annotation.Header
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.domain.MarketPlace
-import net.hemisoft.ccm.domain.key.ResourceUtils
 import net.hemisoft.ccm.porter.Coin
+import net.hemisoft.ccm.utils.ResourceUtils
 
 
 class CoinMarketCapTransformer {

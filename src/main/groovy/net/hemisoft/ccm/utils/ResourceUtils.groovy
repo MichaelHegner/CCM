@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.domain.key
+package net.hemisoft.ccm.utils
 
 import org.springframework.core.io.ClassPathResource
 
