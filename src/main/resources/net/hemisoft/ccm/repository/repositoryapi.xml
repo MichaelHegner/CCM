@@ -9,8 +9,7 @@
 		http://www.springframework.org/schema/integration/jpa http://www.springframework.org/schema/integration/jpa/spring-integration-jpa-5.0.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
 
-	<import resource="../porter/porterapi.xml" />
-	<import resource="flow/_coinmarketcap.xml" />
+<!-- 	<import resource="../porter/porterapi.xml" /> -->
 	<import resource="flow/repository.xml" />
 
 </beans>

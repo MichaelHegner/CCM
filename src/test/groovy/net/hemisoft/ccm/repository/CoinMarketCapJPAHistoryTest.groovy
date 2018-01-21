@@ -1,18 +1,16 @@
 package net.hemisoft.ccm.repository
 
 import static org.junit.Assert.*
-
-import javax.persistence.EntityManager
-import javax.persistence.PersistenceContext
+import static org.springframework.transaction.annotation.Propagation.NOT_SUPPORTED
 
 import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 
 import net.hemisoft.ccm.domain.MarketPlace
@@ -20,8 +18,8 @@ import net.hemisoft.ccm.domain.MarketPlace
 
 @RunWith(SpringRunner)
 @Import(RepositoryConfig)
-//@DataJpaTest
-//@Transactional 
+@DataJpaTest
+@Transactional(propagation = NOT_SUPPORTED)
 class CoinMarketCapJPAHistoryTest {
 	@Autowired CoinOnMarketPlaceService 	sut
 	
