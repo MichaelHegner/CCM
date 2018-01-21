@@ -58,6 +58,7 @@ class CoinMarketCapJPAServiceTest {
 	public void testInsert_ifTwoSameCoinsFromSameMarketInChannel_thenUpdateCoin() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin()
+		bitComp2.setPriceBTC(bitComp2.getPriceBTC() + 10)
 		bitComp2.setLastUpdate(bitComp2.lastUpdate.plusSeconds(10))
 		service.save(bitComp)
 		service.save(bitComp2)
@@ -88,6 +89,8 @@ class CoinMarketCapJPAServiceTest {
 	public void testInsert_ifTwoSameCoinsFromDifferentMarketsInChannel_thenInsertBothCoins() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin(MarketPlace.newInstance(name: "AnyMarketPlace"))
+		bitComp2.setPriceBTC(bitComp2.getPriceBTC() + 10)
+		bitComp2.setLastUpdate(bitComp2.lastUpdate.plusSeconds(10))
 		service.save(bitComp)
 		service.save(bitComp2)
 		
