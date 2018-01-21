@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.history.RevisionRepository
 import org.springframework.stereotype.Repository
 
-import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.domain.MarketPlace
 
 @Repository

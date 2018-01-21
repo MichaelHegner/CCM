@@ -52,7 +52,5 @@ class CoinMarketCapPorterITTest {
 		latch.await 10, SECONDS
 		assert responseCoins != null
 		BitCoinStub.assertCoinAttributeValuesNotNull responseCoins[0]
-		
-		responseCoins.each{ println it}
 	}
 }
