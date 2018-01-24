@@ -20,6 +20,7 @@ import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 
 @Entity
 @EntityListeners(AuditingEntityListener)
@@ -29,6 +30,7 @@ import groovy.transform.EqualsAndHashCode
 		@UniqueConstraint(columnNames= ["coin_id", "market_place_id"]) 
 )
 @EqualsAndHashCode(includes = ["coin", "marketPlace"]) 
+@ToString
 class CoinOnMarketPlace {
 	@Id @GeneratedValue			Long 		id
 	

@@ -13,7 +13,7 @@ import net.hemisoft.ccm.stub.BitCoinStub
 import net.hemisoft.ccm.utils.DateUtils
 import net.hemisoft.ccm.utils.ResourceUtils
 
-public class CoinMarketCap2CoinMapperTest {
+public class CoinMarketCap2CoinNominMapperTest {
 	NominMapper nomin = new Nomin(ResourceUtils.getMapperResource());
 	
 	Coin coin;
