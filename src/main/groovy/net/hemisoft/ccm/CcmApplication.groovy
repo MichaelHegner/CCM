@@ -1,22 +1,22 @@
 package net.hemisoft.ccm
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.context.annotation.Import
-
-import net.hemisoft.ccm.domain.DomainConfig
-import net.hemisoft.ccm.porter.PorterConfig
-import net.hemisoft.ccm.repository.RepositoryConfig
 
 @SpringBootApplication
-class CcmApplication {
+class CcmApplication implements CommandLineRunner {
+	private static final Logger log = LoggerFactory.getLogger(CcmApplication)
 
 	static void main(String[] args) {
-		def ctx = SpringApplication.run CcmApplication, args
-		def scanner = new Scanner(System.in);
-		print 'Press <Return> to quit program'
-		scanner.nextLine()
-		scanner.close()
-		ctx.close()
+		SpringApplication.run CcmApplication, args
+	}
+	
+	@Override
+	void run(String... args) throws Exception {
+//		log.info('Joining thread, you can press Ctrl+C to shutdown application')
+//		Thread.currentThread().join()
 	}
 }
