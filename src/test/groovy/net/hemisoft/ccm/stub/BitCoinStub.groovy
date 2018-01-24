@@ -9,16 +9,16 @@ class BitCoinStub {
 	static final String 		SYMBOL 				= "BTC"
 	static final int 			RANK 				= 1
 	
-	static final BigDecimal 	PRICE_USD 			= 14613.7
+	static final BigDecimal 	PRICE_USD 			= 14613.5
 	static final BigDecimal 	PRICE_BTC 			= 1.0
 	static final BigDecimal 	VOLUME_24H_USD 		= 12079400000.0
 	static final BigDecimal 	MARKET_CAP_USD 		= 245518197535
 	static final BigDecimal 	AVAILABLE_SUPPLY 	= 16800550.0
 	static final BigDecimal 	TOTAL_SUPPLY 		= 16800550.0
 	static final BigDecimal 	MAX_SUPPLY 			= 21000000.0
-	static final BigDecimal 	CHANGE_PERCENT_1H 	= 0.77
-	static final BigDecimal 	CHANGE_PERCENT_24H 	= 3.67
-	static final BigDecimal 	CHANGE_PERCENT_7D 	= -14.24
+	static final BigDecimal 	CHANGE_PERCENT_1H 	= 0.75
+	static final BigDecimal 	CHANGE_PERCENT_24H 	= 3.50
+	static final BigDecimal 	CHANGE_PERCENT_7D 	= -14.25
 	static final Long 			LAST_UPDATE_EPOCH 	= 1515852262
 	
 	static Coin create() {
