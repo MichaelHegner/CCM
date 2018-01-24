@@ -10,16 +10,17 @@ import net.hemisoft.ccm.utils.ResourceUtils
 
 
 class CoinMarketCapTransformer {
-	Nomin nomin = Nomin.newInstance(ResourceUtils.getMapperResource())
+//	Nomin nomin = Nomin.newInstance(ResourceUtils.getMapperResource())
 	
 	CoinOnMarketPlace transform(Coin coin, @Header(name="marketName", required=true) String marketName) {
-		MarketPlace marketPlace = MarketPlace.newInstance(name: marketName)
-		CoinOnMarketPlace comp = nomin.map(coin, CoinOnMarketPlace)
-		comp.marketPlace = marketPlace
-		comp
+//		MarketPlace marketPlace = MarketPlace.newInstance(name: marketName)
+//		CoinOnMarketPlace comp = nomin.map(coin, CoinOnMarketPlace)
+//		comp.marketPlace = marketPlace
+//		comp
+		CoinMarketCapMapper.getPopulated(coin, marketName)
 	}
 	
-	Coin transform(CoinOnMarketPlace comp) {
-		nomin.map(comp, Coin.class)
-	}
+//	Coin transform(CoinOnMarketPlace comp) {
+//		nomin.map(comp, Coin.class)
+//	}
 }
