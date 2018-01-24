@@ -65,8 +65,8 @@ class CoinMarketCapJPAHistoryTest {
 	public void testInsert_ifTwoSameCoinsFromSameMarketInChannel_thenHistoryHasTwoEntry() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin()
-		bitComp2.setPriceBTC(bitComp2.getPriceBTC() + 10)
-		bitComp2.setLastUpdate(bitComp2.lastUpdate.plusSeconds(10))
+		bitComp2.priceBTC = bitComp2.priceBTC + 10
+		bitComp2.lastUpdate = bitComp2.lastUpdate.plusSeconds(10)
 
 		sut.save(bitComp)
 		sut.save(bitComp2)
@@ -98,8 +98,8 @@ class CoinMarketCapJPAHistoryTest {
 	public void testInsert_ifTwoSameCoinsFromDifferentMarketsInChannel_thenEachEntryHasOneHistoryEntry() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin(MarketPlace.newInstance(name: "AnyMarketPlace"))
-		bitComp2.setPriceBTC(bitComp2.getPriceBTC() + 10)
-		bitComp2.setLastUpdate(bitComp2.lastUpdate.plusSeconds(10))
+		bitComp2.priceBTC = bitComp2.priceBTC + 10
+		bitComp2.lastUpdate = bitComp2.lastUpdate.plusSeconds(10)
 		
 		sut.save(bitComp)
 		sut.save(bitComp2)

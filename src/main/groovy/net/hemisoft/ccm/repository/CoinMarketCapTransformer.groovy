@@ -15,7 +15,7 @@ class CoinMarketCapTransformer {
 	CoinOnMarketPlace transform(Coin coin, @Header(name="marketName", required=true) String marketName) {
 		MarketPlace marketPlace = MarketPlace.newInstance(name: marketName)
 		CoinOnMarketPlace comp = nomin.map(coin, CoinOnMarketPlace)
-		comp.setMarketPlace(marketPlace)
+		comp.marketPlace = marketPlace
 		comp
 	}
 	
