@@ -14,7 +14,7 @@ class ScheduledConfiguration {
 	@Autowired @Qualifier("coinmarketcap.request.channel")
 	MessageChannel requestChannel
 	
-	@Scheduled(fixedRate = 10000l)
+	@Scheduled(fixedRate = 1000l)
 	public void reportCurrentTime() {
 		requestChannel.send(MessageBuilder.withPayload("").build())
 	}

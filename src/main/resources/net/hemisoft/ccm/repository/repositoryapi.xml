@@ -10,12 +10,6 @@
 
 	<import resource="flow/repository.xml" />
 
-	<int:channel id="repository.income.channel">
-		<int:interceptors>
-			<int:wire-tap channel="logger" />
-		</int:interceptors>
-	</int:channel>
-
-	<int:logging-channel-adapter id="logger" level="INFO" />
+	<int:channel id="repository.income.channel" />
 
 </beans>
