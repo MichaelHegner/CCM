@@ -1,5 +1,7 @@
 package net.hemisoft.ccm.repository
 
+import javax.annotation.PostConstruct
+
 import org.nomin.core.Nomin
 import org.springframework.messaging.handler.annotation.Header
 
@@ -10,17 +12,18 @@ import net.hemisoft.ccm.utils.ResourceUtils
 
 
 class CoinMarketCapTransformer {
-//	Nomin nomin = Nomin.newInstance(ResourceUtils.getMapperResource())
+	Nomin nomin
 	
-	CoinOnMarketPlace transform(Coin coin, @Header(name="marketName", required=true) String marketName) {
-//		MarketPlace marketPlace = MarketPlace.newInstance(name: marketName)
-//		CoinOnMarketPlace comp = nomin.map(coin, CoinOnMarketPlace)
-//		comp.marketPlace = marketPlace
-//		comp
-		CoinMarketCapMapper.getPopulated(coin, marketName)
+	@PostConstruct
+	void postConstruct() {
+		nomin = Nomin.newInstance(ResourceUtils.getMapperResource())
+		nomin.disableAutomapping()
 	}
-	
-//	Coin transform(CoinOnMarketPlace comp) {
-//		nomin.map(comp, Coin.class)
-//	}
+
+	CoinOnMarketPlace transform(Coin coin, @Header(name="marketName", required=true) String marketName) {
+		MarketPlace marketPlace = MarketPlace.newInstance(name: marketName)
+		CoinOnMarketPlace comp = nomin.map(coin, CoinOnMarketPlace)
+		comp.marketPlace = marketPlace
+		comp
+	}
 }
