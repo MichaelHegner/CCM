@@ -13,7 +13,7 @@
 
 	<int-http:outbound-gateway id="coinmarketcapHttpGateway"
 		request-channel="coinmarketcap.request.channel" 
-		url="https://api.coinmarketcap.com/v1/ticker/"
+		url="https://api.coinmarketcap.com/v1/ticker/?limit=500"
 		expected-response-type="net.hemisoft.ccm.porter.Coins"
 		http-method="GET" 
 		reply-timeout="1000" 

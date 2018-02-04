@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>Time over WebSocket</title>
+	    <script src="http://localhost:8080/sockjs.js"></script>
+	    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	    <script type="text/javascript">
+		    $(document).ready(function() {
+		    	
+		    	// DATATABLE
+		    	var dt1 = $('#example').DataTable({
+		            paging: true,
+		            //ordering: false,
+		            //orderFixed: [0, 'asc'],
+		            searching: false,
+		            lengthChange: false,
+		            //displayStart: 5,
+		        });
+		    	
+		    	function clearTable() {
+					dt1.clear();		    		
+		    	}
+
+		    	function addRow(rank, name, priceUSD, change24h) {
+		    	    var rowNode = dt1
+		    	    	.row.add([rank, name, priceUSD, change24h])
+		    	        .draw(false)
+		    	        .node();
+		    	  	
+		    	    if(change24h < -5) {
+			    	    $(rowNode)
+		    	    		.css({backgroundColor: 'red'})
+		    	        	.animate({backgroundColor: 'white'}, 2500);
+		    	    	
+		    	    } else if (change24h > 5) {
+			    	    $(rowNode)
+			    	    	.css({backgroundColor: 'green'})
+			    	        .animate({backgroundColor: 'white'}, 2500);
+		    	    } else {
+			    	    $(rowNode)
+		    	    		.css({backgroundColor: 'white'})
+		    	        	.animate({backgroundColor: 'white'}, 2500);
+		    	    }
+		    	}
+		    	    
+		    	function updateRow(id, name) {
+		    	  	var rowNum = randomRow();
+		    	    var row = dt1.row(randomRow());
+		    	    // update the second cell i.e. no. 1
+		    	    // draw() only matters if sorting
+		    		// by the updated column
+		    	    var cellNode = dt1.cell(rowNum, 1)
+		    	    	.data(timestamp)
+		    	        .draw(false)
+		    	        .node();
+		    	    
+		    	    $(cellNode)
+		    	    	.css({backgroundColor: 'blue'})
+		    	        .animate({backgroundColor: 'white'}, 2500);
+		    	}
+		    	    
+		    	 	function randomRow() {
+		    	        return randomInt(getDatatableSize());
+		    	    }
+		    	 	
+		    	 	function getDatatableSize() {
+		    	 		 var info = dt1.page.info();
+			    	     return info.recordsTotal;
+		    	 	}
+		    	    
+		    	    function randomInt(max) {
+		    	        return Math.floor((Math.random() * max));
+		    	    }
+		    	    
+		    	    function timestamp() {
+		    	        var d = new Date();    
+		    	        return d.toLocaleTimeString(); 
+		    	    }
+
+		    	
+		    	
+		    	// WEBSOCKET
+		    	var sock = new SockJS('http://localhost:8080/coins');
+		        sock.onopen = function () {
+		            document.getElementById('coinsRequest').innerHTML = 'Connecting...';
+		        };
+		        sock.onmessage = function (e) {
+		        	document.getElementById('coinsRequest').innerHTML = 'Connected';
+		            clearTable();
+		            var obj = JSON.parse(e.data);
+		            $.each(obj, function (index, market) {
+// 		            	console.log(market);
+		            	addRow(market.rank, market.coin.name, market.priceUSD, market.changePercent24h);
+		            });
+		        };
+		        sock.onclose = function () {
+		            document.getElementById('coinsRequest').innerHTML = "Server closed connection or hasn't been started";
+		        };
+	
+		    });  
+	        
+	        
+	    </script>
+	</head>
+	
+	<body style="margin: 0">
+		<noscript>
+			<h2 style="color: #ff0000">
+				Seems your browser doesn't support Javascript! WebSocket relies on Javascript being enabled. 
+				Please enable Javascript and reload this page!
+			</h2>
+		</noscript>
+		<div id="coinsRequest"
+		     style="position: absolute;
+		     bottom: 0;
+		     font-size: 100%;
+		     height: 200px;
+		     margin: auto;
+		     text-align: center;
+		     top: 0;
+		     width: 100%;">
+		     Starting...
+		 </div>
+		 
+		 <div>
+		 	<table class="dataTable" id="example">
+    			<thead>
+        			<tr><th>Rank</th><th>Name</th><th>Price (USD)</th><th>Change 24h</th></tr>
+    			</thead>
+    			<tbody>
+  
+    			</tbody>
+			</table>
+		 </div>
+
+	</body>
+</html>

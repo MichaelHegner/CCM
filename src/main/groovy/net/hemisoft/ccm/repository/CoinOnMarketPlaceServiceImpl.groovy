@@ -3,7 +3,6 @@ package net.hemisoft.ccm.repository
 import javax.transaction.Transactional
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.messaging.handler.annotation.Header
 import org.springframework.stereotype.Service
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
@@ -37,8 +36,8 @@ class CoinOnMarketPlaceServiceImpl implements CoinOnMarketPlaceService {
 	}
 
 	@Override
-	public List<CoinOnMarketPlace> findAll() {
-		coinsOnMarketPlaceRepository.findAll();
+	public Iterable<CoinOnMarketPlace> findAll() {
+		coinsOnMarketPlaceRepository.findAll()
 	}
 
 }

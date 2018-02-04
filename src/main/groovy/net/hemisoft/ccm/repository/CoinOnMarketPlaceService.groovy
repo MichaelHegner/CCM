@@ -6,5 +6,5 @@ import net.hemisoft.ccm.domain.CoinOnMarketPlace
 
 interface CoinOnMarketPlaceService {
 	void save(CoinOnMarketPlace comp)
-	List<CoinOnMarketPlace> findAll()
+	Iterable<CoinOnMarketPlace> findAll()
 }

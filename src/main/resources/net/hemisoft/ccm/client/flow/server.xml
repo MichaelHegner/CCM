@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-websocket="http://www.springframework.org/schema/integration/websocket"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration/websocket http://www.springframework.org/schema/integration/websocket/spring-integration-websocket.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
+
+	<bean id="webSocketSessionStore" class="org.springframework.integration.metadata.SimpleMetadataStore"/>
+
+	<int-websocket:server-container id="websocketServerContainer" path="/coins">
+		<int-websocket:sockjs />
+	</int-websocket:server-container>
+	
+	
+	<int:inbound-channel-adapter ref="sessionProvider" method="findAllSession" channel="sessionChannel">
+		<int:poller fixed-rate="5000" max-messages-per-poll="1" />
+	</int:inbound-channel-adapter>
+	
+	<int:channel id="sessionChannel" />
+	
+	<int:splitter input-channel="sessionChannel" output-channel="splittedChannel" />
+
+	<int:channel id="splittedChannel" />
+	
+	<int:header-enricher id="sessionHeaderEnricher" 
+    	input-channel="splittedChannel"
+    	output-channel="enrichedChannel"
+    >
+        <int:header 
+            name="#{T(org.springframework.messaging.simp.SimpMessageHeaderAccessor).SESSION_ID_HEADER}"
+            expression="payload"
+        />
+    </int:header-enricher>
+    
+    <int:channel id="enrichedChannel" />
+    
+    <int:service-activator id="coinServiceActivator" 
+    	ref="coinOnMarketPlaceServiceImpl" method="findAll" 
+    	input-channel="enrichedChannel"
+    	output-channel="coinSessionChannel"
+    />
+	
+	<int:channel id="coinSessionChannel" />
+	
+    <int-websocket:outbound-channel-adapter id="websocketOutboundChannelAdapter" 
+    	channel="coinSessionChannel"
+    	container="websocketServerContainer"
+    />
+	
+</beans>
