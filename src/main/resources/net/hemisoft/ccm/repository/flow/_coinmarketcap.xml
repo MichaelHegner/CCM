@@ -12,7 +12,7 @@
 	<bean id="coinMarketCapTransformerBean" class="net.hemisoft.ccm.repository.CoinMarketCapTransformer" />
 
 	<int:transformer id="coinMarketCapTransformer" ref="coinMarketCapTransformerBean" 
-		input-channel="coinmarketcap.subscribe.channel"
+		input-channel="porter.subscribe.channel"
         output-channel="coinmarketcap.transformation.outcome.channel"
         method="transform" 
     />

@@ -9,9 +9,10 @@
 		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<import resource="coinmarketcap/coinmarketcap-api.xml" />
-	<int:bridge input-channel="coinmarketcap.subscribe.channel" output-channel="porter.subscribe.channel" />
+	<import resource="flow/porter.xml" />
 	
-	<int:publish-subscribe-channel id="porter.subscribe.channel" />
+	<int:bridge input-channel="coinmarketcap.output.channel" output-channel="coinmarketcap.subscribe.channel" />
+	
+	<int:publish-subscribe-channel id="coinmarketcap.subscribe.channel" />
 
 </beans>

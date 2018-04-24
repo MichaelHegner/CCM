@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.porter
+package net.hemisoft.ccm.porter.coinmarketcap
 
 import static org.junit.Assert.*
 
@@ -13,6 +13,7 @@ import org.springframework.messaging.PollableChannel
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
+import net.hemisoft.ccm.porter.Coins
 import net.hemisoft.ccm.stub.BitCoinStub
 
 @RunWith(SpringRunner)

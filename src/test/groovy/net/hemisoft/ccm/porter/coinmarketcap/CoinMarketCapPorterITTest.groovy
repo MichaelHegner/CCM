@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.porter
+package net.hemisoft.ccm.porter.coinmarketcap
 
 import static java.util.concurrent.TimeUnit.SECONDS
 import static org.junit.Assert.*
@@ -25,7 +25,7 @@ import net.hemisoft.ccm.stub.BitCoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
-@ContextConfiguration("porterapi.xml")
+@ContextConfiguration("coinmarketcap-api.xml")
 class CoinMarketCapPorterITTest {
 	@Autowired @Qualifier("coinmarketcap.request.channel")
 	MessageChannel requestChannel
