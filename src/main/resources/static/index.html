@@ -23,9 +23,9 @@
 					dt1.clear();		    		
 		    	}
 
-		    	function addRow(rank, name, priceUSD, change24h) {
+		    	function addRow(marketName, rank, name, priceUSD, change24h) {
 		    	    var rowNode = dt1
-		    	    	.row.add([rank, name, priceUSD, change24h])
+		    	    	.row.add([marketName, rank, name, priceUSD, change24h])
 		    	        .draw(false)
 		    	        .node();
 		    	  	
@@ -92,7 +92,7 @@
 		            var obj = JSON.parse(e.data);
 		            $.each(obj, function (index, market) {
 // 		            	console.log(market);
-		            	addRow(market.rank, market.coin.name, market.priceUSD, market.changePercent24h);
+		            	addRow(market.marketPlace.name, market.rank, market.coin.name, market.priceUSD, market.changePercent24h);
 		            });
 		        };
 		        sock.onclose = function () {
@@ -127,10 +127,9 @@
 		 <div>
 		 	<table class="dataTable" id="example">
     			<thead>
-        			<tr><th>Rank</th><th>Name</th><th>Price (USD)</th><th>Change 24h</th></tr>
+        			<tr><th>Market</th><th>Rank</th><th>Name</th><th>Price (USD)</th><th>Change 24h</th></tr>
     			</thead>
-    			<tbody>
-  
+    			<tbody>  
     			</tbody>
 			</table>
 		 </div>
