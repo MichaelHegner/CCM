@@ -21,7 +21,7 @@ import org.springframework.messaging.MessagingException
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
-import net.hemisoft.ccm.stub.BitCoinStub
+import net.hemisoft.ccm.stub.coinmarketcap.BitCoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest

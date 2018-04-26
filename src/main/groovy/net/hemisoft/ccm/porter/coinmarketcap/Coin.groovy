@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.porter
+package net.hemisoft.ccm.porter.coinmarketcap
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

@@ -1,25 +1,25 @@
-package net.hemisoft.ccm.stub
+package net.hemisoft.ccm.stub.coinmarketcap
 
-import net.hemisoft.ccm.porter.Coin
+import net.hemisoft.ccm.porter.coinmarketcap.Coin
 
-class BitCoinStub {
-	static final String			MARKET_PLACE_NAME	= "coinMarketCap"
-	static final String 		COIN_ID				= "bitcoin"
-	static final String 		NAME 				= "Bitcoin"
-	static final String 		SYMBOL 				= "BTC"
-	static final int 			RANK 				= 1
+class EthereumCoinStub {
+	static final String			MARKET_PLACE_NAME	= "coinMarketPlace"
+	static final String 		COIN_ID				= "ethereum"
+	static final String 		NAME 				= "Ethereum"
+	static final String 		SYMBOL 				= "ETH"
+	static final int 			RANK 				= 2
 	
-	static final BigDecimal 	PRICE_USD 			= 14613.5
-	static final BigDecimal 	PRICE_BTC 			= 1.0
-	static final BigDecimal 	VOLUME_24H_USD 		= 12079400000.0
-	static final BigDecimal 	MARKET_CAP_USD 		= 245518197535
-	static final BigDecimal 	AVAILABLE_SUPPLY 	= 16800550.0
-	static final BigDecimal 	TOTAL_SUPPLY 		= 16800550.0
-	static final BigDecimal 	MAX_SUPPLY 			= 21000000.0
-	static final BigDecimal 	CHANGE_PERCENT_1H 	= 0.75
-	static final BigDecimal 	CHANGE_PERCENT_24H 	= 3.50
-	static final BigDecimal 	CHANGE_PERCENT_7D 	= -14.25
-	static final Long 			LAST_UPDATE_EPOCH 	= 1515852262
+	static final BigDecimal 	PRICE_USD 			= 1372.18
+	static final BigDecimal 	PRICE_BTC 			= 0.0942203
+	static final BigDecimal 	VOLUME_24H_USD 		= 4984240000.0
+	static final BigDecimal 	MARKET_CAP_USD 		= 133039071219
+	static final BigDecimal 	AVAILABLE_SUPPLY 	= 96954533.0
+	static final BigDecimal 	TOTAL_SUPPLY 		= 96954533.0
+	static final BigDecimal 	MAX_SUPPLY 			= null
+	static final BigDecimal 	CHANGE_PERCENT_1H 	= 0.27
+	static final BigDecimal 	CHANGE_PERCENT_24H 	= 7.36
+	static final BigDecimal 	CHANGE_PERCENT_7D 	= 32.52
+	static final Long 			LAST_UPDATE_EPOCH 	= 1515852250
 	
 	static Coin create() {
 		Coin coin = new Coin()

@@ -23,9 +23,9 @@ import org.springframework.messaging.support.MessageBuilder
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
-import net.hemisoft.ccm.porter.Coin
-import net.hemisoft.ccm.porter.Coins
-import net.hemisoft.ccm.stub.BitCoinStub
+import net.hemisoft.ccm.porter.coinmarketcap.Coin
+import net.hemisoft.ccm.porter.coinmarketcap.Coins
+import net.hemisoft.ccm.stub.coinmarketcap.BitCoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest

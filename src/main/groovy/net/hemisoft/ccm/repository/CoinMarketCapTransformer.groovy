@@ -7,7 +7,7 @@ import org.springframework.messaging.handler.annotation.Header
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.domain.MarketPlace
-import net.hemisoft.ccm.porter.Coin
+import net.hemisoft.ccm.porter.coinmarketcap.Coin
 import net.hemisoft.ccm.utils.ResourceUtils
 
 

@@ -3,8 +3,8 @@ package net.hemisoft.ccm.repository;
 import net.hemisoft.ccm.domain.Coin
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.domain.MarketPlace
-import net.hemisoft.ccm.stub.BitCoinStub
-import net.hemisoft.ccm.stub.EthereumCoinStub
+import net.hemisoft.ccm.stub.coinmarketcap.BitCoinStub
+import net.hemisoft.ccm.stub.coinmarketcap.EthereumCoinStub
 import net.hemisoft.ccm.utils.DateUtils
 
 class CoinOnMarketPlaceStub {

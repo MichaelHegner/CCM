@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.stub;
+package net.hemisoft.ccm.stub.coinmarketcap;
 
 public class CoinMarketCapResponseStub {
 	static def create() {

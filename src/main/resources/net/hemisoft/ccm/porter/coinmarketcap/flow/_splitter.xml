@@ -11,7 +11,7 @@
 
 	<int:channel id="coinmarketcap.response.channel" />
 
-	<bean id="coins2CoinSplitter" class="net.hemisoft.ccm.porter.Coins2CoinSplitter" />
+	<bean id="coins2CoinSplitter" class="net.hemisoft.ccm.porter.coinmarketcap.Coins2CoinSplitter" />
 
 	<int:chain input-channel="coinmarketcap.response.channel" output-channel="coinmarketcap.output.channel">
 		<int:splitter ref="coins2CoinSplitter" method="splitMessage" />

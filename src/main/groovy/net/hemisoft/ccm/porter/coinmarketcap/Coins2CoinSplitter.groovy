@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.porter
+package net.hemisoft.ccm.porter.coinmarketcap
 
 import org.springframework.integration.splitter.AbstractMessageSplitter
 import org.springframework.messaging.Message

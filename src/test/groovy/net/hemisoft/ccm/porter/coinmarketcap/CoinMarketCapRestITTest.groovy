@@ -13,8 +13,8 @@ import org.springframework.messaging.PollableChannel
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
-import net.hemisoft.ccm.porter.Coins
-import net.hemisoft.ccm.stub.BitCoinStub
+import net.hemisoft.ccm.porter.coinmarketcap.Coins
+import net.hemisoft.ccm.stub.coinmarketcap.BitCoinStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
