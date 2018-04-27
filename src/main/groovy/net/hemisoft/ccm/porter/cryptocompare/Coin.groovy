@@ -10,8 +10,8 @@ class Coin {
 	@JsonProperty("CoinName")			String 	name
 	@JsonProperty("Name")	 			String 	symbol
 	@JsonProperty("SortOrder") 			Integer rank
-//	@JsonProperty("price_usd") 			Double 	priceUSD
-//	@JsonProperty("price_btc") 			Double 	priceBTC
+	@JsonProperty("USD") 				Double 	priceUSD
+	@JsonProperty("BTC") 				Double 	priceBTC
 //	@JsonProperty("24h_volume_usd") 	Double 	volume24hUSD
 //	@JsonProperty("market_cap_usd") 	Double 	marketCapUSD
 //	@JsonProperty("available_supply") 	Double 	availableSupply

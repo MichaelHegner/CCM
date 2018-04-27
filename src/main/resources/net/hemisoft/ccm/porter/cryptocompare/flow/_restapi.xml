@@ -11,18 +11,56 @@
 
 	<int:channel id="cryptocompare.request.channel" />
 
-	<int-http:outbound-gateway id="cryptocompareHttpGateway"
-		request-channel="cryptocompare.request.channel" 
+	<int-http:outbound-gateway id="cryptocompareHttpGateway.coinList"
+		request-channel="cryptocompare.request.channel"
+		reply-channel="internal.cryptocompare.coinlist.income.channel"
 		url="https://www.cryptocompare.com/api/data/coinlist/"
 		expected-response-type="net.hemisoft.ccm.porter.cryptocompare.CoinList"
 		http-method="GET" 
-		reply-timeout="1000" 
+		reply-timeout="10000" 
 		charset="UTF-8"
-		reply-channel="cryptocompare.income.channel"
 	/>
 
+	<int:channel id="internal.cryptocompare.coinlist.income.channel" />
+
+	<int:chain id="transformerCoinListToCoinChain" input-channel="internal.cryptocompare.coinlist.income.channel" output-channel="internal.cryptocompare.coin.income.channel">
+		<int:transformer expression="payload.coins.values()" />
+		<int:splitter />
+		<int:filter expression="payload.rank &lt; 200"></int:filter>
+	</int:chain>
+
+	<int:channel id="internal.cryptocompare.coin.income.channel" />
+	
+	<int:enricher id="coinPriceEnricher"
+		input-channel="internal.cryptocompare.coin.income.channel"
+		request-channel="internal.cryptocompare.coin.price.enrich.channel"
+		output-channel="cryptocompare.income.channel"
+	>
+		<int:property name="priceBTC" expression="payload.priceBTC"/>
+		<int:property name="priceUSD" expression="payload.priceUSD"/>
+	</int:enricher>
+	
+	<int:channel id="internal.cryptocompare.coin.price.enrich.channel" />
+	
+	<int-http:outbound-gateway id="cryptocompareHttpGateway.coinPrice" 
+		request-channel="internal.cryptocompare.coin.price.enrich.channel"
+		expected-response-type="net.hemisoft.ccm.porter.cryptocompare.Coin"
+		url="https://min-api.cryptocompare.com/data/price?fsym={fsym}&amp;tsyms={tsyms}"
+		http-method="GET" 
+		reply-timeout="10000" 
+		charset="UTF-8"
+	>
+		<int-http:uri-variable name="fsym" expression="payload.symbol" />
+		<int-http:uri-variable name="tsyms" expression="'BTC,USD,EUR'" />
+	</int-http:outbound-gateway>
+
 	<int:channel id="cryptocompare.income.channel">
-		<int:queue capacity="1000"/>
+		<int:queue capacity="1000" />
+		<int:interceptors >
+			<int:wire-tap channel="loggerChannel"/>
+		</int:interceptors>
 	</int:channel>
+	
+	<int:logging-channel-adapter id="loggerChannel" level="INFO"/>
 
 </beans>

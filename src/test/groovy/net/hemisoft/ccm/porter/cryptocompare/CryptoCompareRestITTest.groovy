@@ -27,18 +27,13 @@ class CryptoCompareRestITTest {
 		def request = MessageBuilder.withPayload("").build()
 		assert true == requestChannel.send(request)
 		
-		def response = incomeChannel.receive(10000)		
+		def response = incomeChannel.receive 10000		
 		assert response != null
 		
 		def responseGetPayload = response.getPayload()
 		assert responseGetPayload != null
-		assert responseGetPayload.getClass() == CoinList
-		
-		def coins = responseGetPayload.coins
-		assert coins.size() > 0
-		coins.each{k, v -> assert v.getClass() == Coin}
-		
-		assertCoinAttributeValuesNotNull(coins["BTC"])
+		assert responseGetPayload.getClass() == Coin
+		assertCoinAttributeValuesNotNull(responseGetPayload)
 	}
 
 	void assertCoinAttributeValuesNotNull(Coin coin) {
@@ -46,5 +41,7 @@ class CryptoCompareRestITTest {
 		assert coin.name 				!= null
 		assert coin.symbol 				!= null
 		assert coin.rank 				!= null
+		assert coin.priceUSD			!= null
+		assert coin.priceBTC			!= null
 	}
 }
