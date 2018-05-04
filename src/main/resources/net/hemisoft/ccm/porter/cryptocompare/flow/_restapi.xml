@@ -11,6 +11,15 @@
 
 	<int:channel id="cryptocompare.request.channel" />
 
+	<!-- 
+		Resources:
+		* https://github.com/json-path/JsonPath
+	 -->
+	
+	<!-- ===================== -->
+	<!-- 1. Take List of Coins -->
+	<!-- ===================== -->
+
 	<int-http:outbound-gateway id="cryptocompareHttpGateway.coinList"
 		request-channel="cryptocompare.request.channel"
 		reply-channel="internal.cryptocompare.coinlist.income.channel"
@@ -30,11 +39,16 @@
 	</int:chain>
 
 	<int:channel id="internal.cryptocompare.coin.income.channel" />
+		
+	<!-- ===================== -->
+	<!-- 2. Enrich the price   -->
+	<!-- ===================== -->
 	
 	<int:enricher id="coinPriceEnricher"
 		input-channel="internal.cryptocompare.coin.income.channel"
 		request-channel="internal.cryptocompare.coin.price.enrich.channel"
-		output-channel="cryptocompare.income.channel"
+		output-channel="internal.cryptocompare.coin.price.enriched.income.channel"
+		error-channel="cryptocompare.error.channel"
 	>
 		<int:property name="priceBTC" expression="payload.priceBTC"/>
 		<int:property name="priceUSD" expression="payload.priceUSD"/>
@@ -53,14 +67,61 @@
 		<int-http:uri-variable name="fsym" expression="payload.symbol" />
 		<int-http:uri-variable name="tsyms" expression="'BTC,USD,EUR'" />
 	</int-http:outbound-gateway>
+	
+	<int:channel id="internal.cryptocompare.coin.price.enriched.income.channel" />
+	
+	<!-- ===================== -->
+	<!-- 3. Enrich the Market  -->
+	<!-- ===================== -->
+		
+	<int:enricher id="coinMarketEnricher"
+		input-channel="internal.cryptocompare.coin.price.enriched.income.channel"
+		request-channel="internal.cryptocompare.coin.market.enrich.channel"
+		output-channel="cryptocompare.income.channel"
+		error-channel="cryptocompare.error.channel"
+		
+	>
+		<int:property name="volume24hUSD" expression="#jsonPath(payload, '$..VOLUME24HOUR').size() > 0 ? #jsonPath(payload, '$..VOLUME24HOUR')[0] : null"/>
+		<int:property name="marketCapUSD" expression="#jsonPath(payload, '$..MKTCAP').size() > 0 ? #jsonPath(payload, '$..MKTCAP')[0] : null"/>
+		<int:property name="availableSupply" expression="#jsonPath(payload, '$..SUPPLY').size() > 0 ? #jsonPath(payload, '$..SUPPLY')[0] : null"/>
+		<int:property name="changePercent24h" expression="#jsonPath(payload, '$..CHANGEPCT24HOUR').size() > 0 ? #jsonPath(payload, '$..CHANGEPCT24HOUR')[0] : null"/>
+		<int:property name="lastUpdateEpoch" expression="#jsonPath(payload, '$..LASTUPDATE').size() > 0 ? #jsonPath(payload, '$..LASTUPDATE')[0] : null"/>
+	</int:enricher>
+	
+	<int:channel id="internal.cryptocompare.coin.market.enrich.channel" />
+	
+	<int:chain input-channel="internal.cryptocompare.coin.market.enrich.channel">
+		<int-http:outbound-gateway id="cryptocompareHttpGateway.marketData" 
+			url="https://min-api.cryptocompare.com/data/pricemultifull?fsyms={fsym}&amp;tsyms={tsyms}"
+			http-method="GET" 
+			reply-timeout="10000" 
+			charset="UTF-8"
+			expected-response-type="java.lang.String"
+		>
+			<int-http:uri-variable name="fsym" expression="payload.symbol" />
+			<int-http:uri-variable name="tsyms" expression="'USD'" />
+		</int-http:outbound-gateway>
+	</int:chain>
+	<!-- ================================================================================= -->
 
 	<int:channel id="cryptocompare.income.channel">
 		<int:queue capacity="1000" />
 		<int:interceptors >
-			<int:wire-tap channel="loggerChannel"/>
+			<int:wire-tap channel="infoChannel"/>
 		</int:interceptors>
 	</int:channel>
 	
-	<int:logging-channel-adapter id="loggerChannel" level="INFO"/>
+	<int:logging-channel-adapter id="infoChannel" level="INFO" />
+	
+	<!-- ================================================================================= -->
+	
+	<int:channel id="cryptocompare.error.channel">
+		<int:interceptors >
+			<int:wire-tap channel="errorChannel"/>
+		</int:interceptors>
+	</int:channel>
+
+	<int:logging-channel-adapter id="errorChannel" level="ERROR" log-full-message="true"/>
+
 
 </beans>

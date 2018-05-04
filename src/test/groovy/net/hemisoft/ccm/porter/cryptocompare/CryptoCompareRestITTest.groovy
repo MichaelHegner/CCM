@@ -37,11 +37,17 @@ class CryptoCompareRestITTest {
 	}
 
 	void assertCoinAttributeValuesNotNull(Coin coin) {
-		assert coin.coinId 				!= null
-		assert coin.name 				!= null
-		assert coin.symbol 				!= null
-		assert coin.rank 				!= null
-		assert coin.priceUSD			!= null
-		assert coin.priceBTC			!= null
+		assert null != coin.coinId
+		assert null != coin.name
+		assert null != coin.symbol
+		assert null != coin.rank
+		assert null != coin.priceUSD
+		assert null != coin.priceBTC
+		assert null != coin.volume24hUSD
+		assert null != coin.marketCapUSD
+		assert null != coin.availableSupply
+		assert null != coin.changePercent24h
+		assert null != coin.lastUpdateEpoch
+		assert null != coin.marketName
 	}
 }

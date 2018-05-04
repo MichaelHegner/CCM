@@ -12,13 +12,9 @@ class Coin {
 	@JsonProperty("SortOrder") 			Integer rank
 	@JsonProperty("USD") 				Double 	priceUSD
 	@JsonProperty("BTC") 				Double 	priceBTC
-//	@JsonProperty("24h_volume_usd") 	Double 	volume24hUSD
-//	@JsonProperty("market_cap_usd") 	Double 	marketCapUSD
-//	@JsonProperty("available_supply") 	Double 	availableSupply
-//	@JsonProperty("total_supply") 		Double 	totalSupply
-//	@JsonProperty("max_supply") 		Double 	maxSupply		// Optional
-//	@JsonProperty("percent_change_1h") 	Double 	changePercent1h
-//	@JsonProperty("percent_change_24h") Double 	changePercent24h
-//	@JsonProperty("percent_change_7d") 	Double 	changePercent7d
-//	@JsonProperty("last_updated") 		Long 	lastUpdateEpoch
+	@JsonProperty("VOLUME24HOUR") 		Double 	volume24hUSD
+	@JsonProperty("MKTCAP") 			Double 	marketCapUSD
+	@JsonProperty("SUPPLY") 			Double 	availableSupply
+	@JsonProperty("CHANGEPCT24HOUR") 	Double 	changePercent24h
+	@JsonProperty("LASTUPDATE") 		Long 	lastUpdateEpoch
 }
