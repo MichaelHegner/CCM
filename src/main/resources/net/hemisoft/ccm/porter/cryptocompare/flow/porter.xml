@@ -12,7 +12,7 @@
 	<import resource="_restapi.xml"/>
 	
 	<int:bridge input-channel="cryptocompare.income.channel" 
-				output-channel="cryptocompare.income.channel"
+				output-channel="cryptocompare.response.channel"
 	>
 		<int:poller fixed-rate="1000" />
 	</int:bridge>

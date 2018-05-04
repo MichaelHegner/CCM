@@ -15,34 +15,34 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
-import net.hemisoft.ccm.porter.coinmarketcap.Coin
-import net.hemisoft.ccm.stub.coinmarketcap.BitCoinStub
-import net.hemisoft.ccm.stub.coinmarketcap.CoinOnMarketPlaceStub
+import net.hemisoft.ccm.porter.cryptocompare.Coin
+import net.hemisoft.ccm.stub.cryptocompare.BitCoinStub
+import net.hemisoft.ccm.stub.cryptocompare.CoinOnMarketPlaceStub
 
 @RunWith(SpringRunner)
 @SpringBootTest
-@ContextConfiguration(locations= ["../porter/porterapi.xml", "flow/_coinmarketcap.xml"])
-public class CoinMarketCap2CoinTransformerTest {
-	@Autowired @Qualifier("coinmarketcap.subscribe.channel")
+@ContextConfiguration(locations= ["../porter/porterapi.xml", "flow/_cryptocompare.xml"])
+public class CryptoCompare2CoinTransformerTest {
+	@Autowired @Qualifier("cryptocompare.subscribe.channel")
 	PublishSubscribeChannel subscribeChannel
 	
-	@Autowired @Qualifier("coinmarketcap.transformation.outcome.channel")
+	@Autowired @Qualifier("cryptocompare.transformation.outcome.channel")
 	PollableChannel incomeChannel
 	
 	@Test
 	public void test() {
 		def messageBuilder = MessageBuilder.withPayload BitCoinStub.create()
-		messageBuilder.setHeader "marketName", "coinMarketCap"
+		messageBuilder.setHeader "marketName", "cryptoCompare"
 		def request = messageBuilder.build()
 		assert subscribeChannel.send(request) == true
 		
 		def responseMessage = incomeChannel.receive(2000)
-		assert null != responseMessage
-		assert null != responseMessage.getPayload()
-		assert CoinOnMarketPlace == responseMessage.getPayload().getClass()
+		assert responseMessage != null
+		assert responseMessage.getPayload() != null
+		assert responseMessage.getPayload().getClass() == CoinOnMarketPlace
 		
 		def response = responseMessage.getPayload()
-		CoinOnMarketPlaceStub.assertBitcoinValues response
+		CoinOnMarketPlaceStub.assertBitcoinValues(response)
 	}
 
 }

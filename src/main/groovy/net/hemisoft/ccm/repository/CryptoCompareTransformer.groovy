@@ -7,16 +7,16 @@ import org.springframework.messaging.handler.annotation.Header
 
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.domain.MarketPlace
-import net.hemisoft.ccm.porter.coinmarketcap.Coin
+import net.hemisoft.ccm.porter.cryptocompare.Coin
 import net.hemisoft.ccm.utils.ResourceUtils
 
 
-class CoinMarketCapTransformer {
+class CryptoCompareTransformer {
 	Nomin nomin
 	
 	@PostConstruct
 	void postConstruct() {
-		def mapperResource = ResourceUtils.coinMarketCapMapperResource
+		def mapperResource = ResourceUtils.cryptoCompareMapperResource
 		nomin = Nomin.newInstance mapperResource
 		nomin.disableAutomapping()
 	}

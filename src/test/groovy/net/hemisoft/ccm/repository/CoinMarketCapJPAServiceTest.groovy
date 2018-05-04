@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit4.SpringRunner
 
 import net.hemisoft.ccm.domain.MarketPlace
+import net.hemisoft.ccm.stub.coinmarketcap.CoinOnMarketPlaceStub
 
 
 /**

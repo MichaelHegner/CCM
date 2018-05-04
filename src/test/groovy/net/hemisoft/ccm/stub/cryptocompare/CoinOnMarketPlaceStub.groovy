@@ -1,10 +1,8 @@
-package net.hemisoft.ccm.repository;
+package net.hemisoft.ccm.stub.cryptocompare;
 
 import net.hemisoft.ccm.domain.Coin
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.domain.MarketPlace
-import net.hemisoft.ccm.stub.coinmarketcap.BitCoinStub
-import net.hemisoft.ccm.stub.coinmarketcap.EthereumCoinStub
 import net.hemisoft.ccm.utils.DateUtils
 
 class CoinOnMarketPlaceStub {
@@ -25,11 +23,7 @@ class CoinOnMarketPlaceStub {
 		comp.volume24hUSD 				= BitCoinStub.VOLUME_24H_USD
 		comp.marketCapUSD 				= BitCoinStub.MARKET_CAP_USD
 		comp.availableSupply 			= BitCoinStub.AVAILABLE_SUPPLY
-		comp.totalSupply 				= BitCoinStub.TOTAL_SUPPLY
-		comp.maxSupply 					= BitCoinStub.MAX_SUPPLY
-		comp.changePercent1h 			= BitCoinStub.CHANGE_PERCENT_1H
 		comp.changePercent24h 			= BitCoinStub.CHANGE_PERCENT_24H
-		comp.changePercent7d 			= BitCoinStub.CHANGE_PERCENT_7D
 		comp.lastUpdate 				= DateUtils.convertEpochMillis(BitCoinStub.LAST_UPDATE_EPOCH)
 		comp
 	}
@@ -45,11 +39,7 @@ class CoinOnMarketPlaceStub {
 		assert comp.volume24hUSD 		== BitCoinStub.VOLUME_24H_USD
 		assert comp.marketCapUSD 		== BitCoinStub.MARKET_CAP_USD
 		assert comp.availableSupply 	== BitCoinStub.AVAILABLE_SUPPLY
-		assert comp.totalSupply 		== BitCoinStub.TOTAL_SUPPLY
-		assert comp.maxSupply 			== BitCoinStub.MAX_SUPPLY
-		assert comp.changePercent1h 	== BitCoinStub.CHANGE_PERCENT_1H
 		assert comp.changePercent24h 	== BitCoinStub.CHANGE_PERCENT_24H
-		assert comp.changePercent7d 	== BitCoinStub.CHANGE_PERCENT_7D
 		assert comp.lastUpdate 			== DateUtils.convertEpochMillis(BitCoinStub.LAST_UPDATE_EPOCH)
 	}
 	

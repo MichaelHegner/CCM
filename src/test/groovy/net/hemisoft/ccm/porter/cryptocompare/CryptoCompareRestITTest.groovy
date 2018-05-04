@@ -7,6 +7,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.integration.channel.QueueChannel
 import org.springframework.integration.support.MessageBuilder
 import org.springframework.messaging.MessageChannel
 import org.springframework.test.context.ContextConfiguration
@@ -20,20 +21,21 @@ class CryptoCompareRestITTest {
 	MessageChannel requestChannel
 	
 	@Autowired @Qualifier("cryptocompare.income.channel") 
-	MessageChannel incomeChannel
+	QueueChannel incomeChannel
 	
 	@Test
 	public void test() {
 		def request = MessageBuilder.withPayload("").build()
 		assert true == requestChannel.send(request)
 		
-		def response = incomeChannel.receive 10000		
-		assert response != null
-		
-		def responseGetPayload = response.getPayload()
-		assert responseGetPayload != null
-		assert responseGetPayload.getClass() == Coin
-		assertCoinAttributeValuesNotNull(responseGetPayload)
+		def response
+		while(response = incomeChannel.receive 10000) {
+			assert response != null
+			def responseGetPayload = response.getPayload()
+			assert responseGetPayload != null
+			assert responseGetPayload.getClass() == Coin
+			assertCoinAttributeValuesNotNull(responseGetPayload)
+		} 
 	}
 
 	void assertCoinAttributeValuesNotNull(Coin coin) {

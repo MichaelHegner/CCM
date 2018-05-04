@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 
 import net.hemisoft.ccm.domain.MarketPlace
+import net.hemisoft.ccm.stub.coinmarketcap.CoinOnMarketPlaceStub
 
 
 @RunWith(SpringRunner)

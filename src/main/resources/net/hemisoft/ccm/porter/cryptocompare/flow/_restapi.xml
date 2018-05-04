@@ -50,8 +50,8 @@
 		output-channel="internal.cryptocompare.coin.price.enriched.income.channel"
 		error-channel="cryptocompare.error.channel"
 	>
-		<int:property name="priceBTC" expression="payload.priceBTC"/>
-		<int:property name="priceUSD" expression="payload.priceUSD"/>
+		<int:property name="priceBTC" expression="payload.priceBTC?:-1"/>
+		<int:property name="priceUSD" expression="payload.priceUSD?:-1"/>
 	</int:enricher>
 	
 	<int:channel id="internal.cryptocompare.coin.price.enrich.channel" />
@@ -81,11 +81,11 @@
 		error-channel="cryptocompare.error.channel"
 		
 	>
-		<int:property name="volume24hUSD" expression="#jsonPath(payload, '$..VOLUME24HOUR').size() > 0 ? #jsonPath(payload, '$..VOLUME24HOUR')[0] : null"/>
-		<int:property name="marketCapUSD" expression="#jsonPath(payload, '$..MKTCAP').size() > 0 ? #jsonPath(payload, '$..MKTCAP')[0] : null"/>
-		<int:property name="availableSupply" expression="#jsonPath(payload, '$..SUPPLY').size() > 0 ? #jsonPath(payload, '$..SUPPLY')[0] : null"/>
-		<int:property name="changePercent24h" expression="#jsonPath(payload, '$..CHANGEPCT24HOUR').size() > 0 ? #jsonPath(payload, '$..CHANGEPCT24HOUR')[0] : null"/>
-		<int:property name="lastUpdateEpoch" expression="#jsonPath(payload, '$..LASTUPDATE').size() > 0 ? #jsonPath(payload, '$..LASTUPDATE')[0] : null"/>
+		<int:property name="volume24hUSD" expression="#jsonPath(payload, '$..VOLUME24HOUR').size() > 0 ? #jsonPath(payload, '$..VOLUME24HOUR')[0] : -1"/>
+		<int:property name="marketCapUSD" expression="#jsonPath(payload, '$..MKTCAP').size() > 0 ? #jsonPath(payload, '$..MKTCAP')[0] : -1"/>
+		<int:property name="availableSupply" expression="#jsonPath(payload, '$..SUPPLY').size() > 0 ? #jsonPath(payload, '$..SUPPLY')[0] : -1"/>
+		<int:property name="changePercent24h" expression="#jsonPath(payload, '$..CHANGEPCT24HOUR').size() > 0 ? #jsonPath(payload, '$..CHANGEPCT24HOUR')[0] : -1"/>
+		<int:property name="lastUpdateEpoch" expression="#jsonPath(payload, '$..LASTUPDATE').size() > 0 ? #jsonPath(payload, '$..LASTUPDATE')[0] : -1"/>
 	</int:enricher>
 	
 	<int:channel id="internal.cryptocompare.coin.market.enrich.channel" />
@@ -107,11 +107,11 @@
 	<int:channel id="cryptocompare.income.channel">
 		<int:queue capacity="1000" />
 		<int:interceptors >
-			<int:wire-tap channel="infoChannel"/>
+			<int:wire-tap channel="debugChannel"/>
 		</int:interceptors>
 	</int:channel>
 	
-	<int:logging-channel-adapter id="infoChannel" level="INFO" />
+	<int:logging-channel-adapter id="debugChannel" level="DEBUG" />
 	
 	<!-- ================================================================================= -->
 	

@@ -10,8 +10,14 @@
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
 
 	<import resource="_coinmarketcap.xml" />
-	
 	<int:bridge input-channel="coinmarketcap.transformation.outcome.channel" 
+				output-channel="repository.income.channel"
+	>
+		<int:poller fixed-rate="1000" />
+	</int:bridge>
+
+	<import resource="_cryptocompare.xml" />
+	<int:bridge input-channel="cryptocompare.transformation.outcome.channel" 
 				output-channel="repository.income.channel"
 	>
 		<int:poller fixed-rate="1000" />

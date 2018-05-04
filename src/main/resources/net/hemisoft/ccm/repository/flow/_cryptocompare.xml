@@ -9,15 +9,15 @@
 		http://www.springframework.org/schema/integration/jpa http://www.springframework.org/schema/integration/jpa/spring-integration-jpa.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<bean id="coinMarketCapTransformerBean" class="net.hemisoft.ccm.repository.CoinMarketCapTransformer" />
+	<bean id="cryptoCompareTransformerBean" class="net.hemisoft.ccm.repository.CryptoCompareTransformer" />
 
-	<int:transformer id="coinMarketCapTransformer" ref="coinMarketCapTransformerBean" 
-		input-channel="coinmarketcap.porter.subscribe.channel"
-        output-channel="coinmarketcap.transformation.outcome.channel"
+	<int:transformer id="cryptoCompareTransformer" ref="cryptoCompareTransformerBean" 
+		input-channel="cryptocompare.porter.subscribe.channel"
+        output-channel="cryptocompare.transformation.outcome.channel"
         method="transform" 
     />
     
-    <int:channel id="coinmarketcap.transformation.outcome.channel">
+    <int:channel id="cryptocompare.transformation.outcome.channel">
     	<int:queue capacity="1000"/>
     </int:channel>
     

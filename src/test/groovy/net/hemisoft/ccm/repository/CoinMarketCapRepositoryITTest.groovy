@@ -20,6 +20,8 @@ import org.springframework.messaging.MessageChannel
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
+import net.hemisoft.ccm.stub.coinmarketcap.CoinOnMarketPlaceStub
+
 
 @RunWith(SpringRunner)
 @SpringBootTest

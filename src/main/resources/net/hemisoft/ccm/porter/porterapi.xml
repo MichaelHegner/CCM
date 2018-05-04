@@ -10,8 +10,12 @@
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
 	<import resource="coinmarketcap/coinmarketcap-api.xml" />
-	<int:bridge input-channel="coinmarketcap.subscribe.channel" output-channel="porter.subscribe.channel" />
+	<int:bridge input-channel="coinmarketcap.subscribe.channel" output-channel="coinmarketcap.porter.subscribe.channel" />
+	<int:publish-subscribe-channel id="coinmarketcap.porter.subscribe.channel" />
 	
-	<int:publish-subscribe-channel id="porter.subscribe.channel" />
+	<import resource="cryptocompare/cryptocompare-api.xml" />
+	<int:bridge input-channel="cryptocompare.subscribe.channel" output-channel="cryptocompare.porter.subscribe.channel" />
+	<int:publish-subscribe-channel id="cryptocompare.porter.subscribe.channel" />
+	
 
 </beans>
