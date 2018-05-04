@@ -48,6 +48,5 @@ class CryptoCompareRestITTest {
 		assert null != coin.availableSupply
 		assert null != coin.changePercent24h
 		assert null != coin.lastUpdateEpoch
-		assert null != coin.marketName
 	}
 }
