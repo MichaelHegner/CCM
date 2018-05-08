@@ -15,11 +15,22 @@ class ScheduledConfiguration {
 	@Autowired @Qualifier("cryptocompare.request.channel") 		MessageChannel cryptocompareChannel
 	@Autowired @Qualifier("marketsimulator.request.channel") 	MessageChannel marketsimulatorChannel
 	
-	@Scheduled(fixedRate = 1000l)
-	void startCoinUpdates() {
+	@Scheduled(fixedRate = 10000l)
+	void startCoinMarketCapUpdates() {
 		def request = MessageBuilder.withPayload("").build()
 		coinmarketcapChannel.send 	request, 10000
+	}
+	
+	@Scheduled(fixedRate = 10000l)
+	void startCryptoCompareUpdates() {
+		def request = MessageBuilder.withPayload("").build()
 		cryptocompareChannel.send 	request, 10000
+	}
+	
+	
+	@Scheduled(fixedRate = 1000l)
+	void startMarketSimulatorUpdates() {
+		def request = MessageBuilder.withPayload("").build()
 		marketsimulatorChannel.send request, 10000
 	}
 }
