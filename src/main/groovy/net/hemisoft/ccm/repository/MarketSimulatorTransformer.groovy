@@ -19,6 +19,7 @@ class MarketSimulatorTransformer {
 		def mapperResource = ResourceUtils.marketSimulatorMapperResource
 		nomin = Nomin.newInstance mapperResource
 		nomin.disableAutomapping()
+		nomin.disableCache()
 	}
 
 	CoinOnMarketPlace transform(Coin coin, @Header(name="marketName", required=true) String marketName) {

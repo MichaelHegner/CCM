@@ -19,6 +19,7 @@ class CryptoCompareTransformer {
 		def mapperResource = ResourceUtils.cryptoCompareMapperResource
 		nomin = Nomin.newInstance mapperResource
 		nomin.disableAutomapping()
+		nomin.disableCache()
 	}
 
 	CoinOnMarketPlace transform(Coin coin, @Header(name="marketName", required=true) String marketName) {
