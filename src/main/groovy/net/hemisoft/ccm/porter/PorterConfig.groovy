@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.porter.coinmarketcap
+package net.hemisoft.ccm.porter
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.ImportResource

@@ -53,7 +53,7 @@ class CoinOnMarketPlace {
 								BigDecimal 		totalSupply			
 								BigDecimal 		maxSupply			
 	@Column						BigDecimal 		changePercent1h
-	@Column(nullable = false)	BigDecimal 		changePercent24h
+	@Column						BigDecimal 		changePercent24h
 	@Column						BigDecimal 		changePercent7d
 	@Column(nullable = false)	LocalDateTime 	lastUpdate	
 	

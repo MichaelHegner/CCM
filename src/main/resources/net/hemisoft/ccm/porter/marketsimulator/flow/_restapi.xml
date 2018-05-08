@@ -9,17 +9,17 @@
 		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<import resource="marketsimulator/marketsimulator-api.xml" />
-	<int:bridge input-channel="marketsimulator.subscribe.channel" output-channel="marketsimulator.porter.subscribe.channel" />
-	<int:publish-subscribe-channel id="marketsimulator.porter.subscribe.channel" />
+	<int:channel id="marketsimulator.request.channel" />
 
-	<import resource="coinmarketcap/coinmarketcap-api.xml" />
-	<int:bridge input-channel="coinmarketcap.subscribe.channel" output-channel="coinmarketcap.porter.subscribe.channel" />
-	<int:publish-subscribe-channel id="coinmarketcap.porter.subscribe.channel" />
-	
-	<import resource="cryptocompare/cryptocompare-api.xml" />
-	<int:bridge input-channel="cryptocompare.subscribe.channel" output-channel="cryptocompare.porter.subscribe.channel" />
-	<int:publish-subscribe-channel id="cryptocompare.porter.subscribe.channel" />
-	
+	<bean id="marketSimulator" class="net.hemisoft.ccm.porter.marketsimulator.MarketSimulator" />
+
+	<int:service-activator 
+		input-channel="marketsimulator.request.channel" output-channel="marketsimulator.income.channel"
+		ref="marketSimulator" method="generateCoins" 
+	/>
+
+	<int:channel id="marketsimulator.income.channel">
+		<int:queue capacity="1000"/>
+	</int:channel>
 
 </beans>

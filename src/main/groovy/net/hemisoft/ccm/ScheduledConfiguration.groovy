@@ -11,13 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableScheduling
 class ScheduledConfiguration {
-	@Autowired @Qualifier("coinmarketcap.request.channel") MessageChannel coinmarketcapChannel
-	@Autowired @Qualifier("cryptocompare.request.channel") MessageChannel cryptocompareChannel
+	@Autowired @Qualifier("coinmarketcap.request.channel") 		MessageChannel coinmarketcapChannel
+	@Autowired @Qualifier("cryptocompare.request.channel") 		MessageChannel cryptocompareChannel
+	@Autowired @Qualifier("marketsimulator.request.channel") 	MessageChannel marketsimulatorChannel
 	
 	@Scheduled(fixedRate = 1000l)
 	void startCoinUpdates() {
 		def request = MessageBuilder.withPayload("").build()
-		coinmarketcapChannel.send request, 10000
-		cryptocompareChannel.send request, 10000
+		coinmarketcapChannel.send 	request, 10000
+		cryptocompareChannel.send 	request, 10000
+		marketsimulatorChannel.send request, 10000
 	}
 }
