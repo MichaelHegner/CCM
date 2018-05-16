@@ -12,6 +12,9 @@
 		    	// DATATABLE
 		    	var dt1 = $('#example').DataTable({
 		            paging: true,
+		            orderCellsTop: true,
+		            fixedHeader: true,
+		            filter: true,
 		            //ordering: false,
 		            //orderFixed: [0, 'asc'],
 		            searching: false,
@@ -61,25 +64,24 @@
 		    	        .animate({backgroundColor: 'white'}, 2500);
 		    	}
 		    	    
-		    	 	function randomRow() {
-		    	        return randomInt(getDatatableSize());
-		    	    }
-		    	 	
-		    	 	function getDatatableSize() {
-		    	 		 var info = dt1.page.info();
-			    	     return info.recordsTotal;
-		    	 	}
-		    	    
-		    	    function randomInt(max) {
-		    	        return Math.floor((Math.random() * max));
-		    	    }
-		    	    
-		    	    function timestamp() {
-		    	        var d = new Date();    
-		    	        return d.toLocaleTimeString(); 
-		    	    }
+	    	 	function randomRow() {
+	    	        return randomInt(getDatatableSize());
+	    	    }
+	    	 	
+	    	 	function getDatatableSize() {
+	    	 		 var info = dt1.page.info();
+		    	     return info.recordsTotal;
+	    	 	}
+	    	    
+	    	    function randomInt(max) {
+	    	        return Math.floor((Math.random() * max));
+	    	    }
+	    	    
+	    	    function timestamp() {
+	    	        var d = new Date();    
+	    	        return d.toLocaleTimeString(); 
+	    	    }
 
-		    	
 		    	
 		    	// WEBSOCKET
 		    	var sock = new SockJS('http://localhost:8080/coins');
@@ -94,6 +96,7 @@
 // 		            	console.log(market);
 		            	addRow(market.marketPlace.name, market.rank, market.coin.name, market.priceUSD, market.changePercent24h);
 		            });
+// 		            initFilter();
 		        };
 		        sock.onclose = function () {
 		            document.getElementById('coinsRequest').innerHTML = "Server closed connection or hasn't been started";
@@ -122,6 +125,15 @@
 		     top: 0;
 		     width: 100%;">
 		     Starting...
+		 </div>
+		 
+		 <div>
+		 	<form th:action="@{/filter}" method="post">
+	            <div class="form-group">
+	                <label for="filterMarketName">Market-Name:</label>
+	                 <input id="filterMarketName" name="filterMarketName" type="text" placeholder="Search Market" />
+	            </div>
+		 	</form>
 		 </div>
 		 
 		 <div>
