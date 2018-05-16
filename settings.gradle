@@ -1,0 +1,5 @@
+rootProject.name = 'crypto-currency-markets'
+
+include 'app'
+
+rootProject.children.each { it.name = rootProject.name + '-' + it.name }

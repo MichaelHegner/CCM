@@ -1,8 +1,11 @@
 buildscript {
 	ext {
+		project.group = 'net.hemisoft.calculator'
+		project.version = '0.0.1-SNAPSHOT'
 		springBootVersion = '2.0.1.RELEASE'
 	}
 	repositories {
+		mavenLocal()
 		mavenCentral()
 	}
 	dependencies {
@@ -12,14 +15,14 @@ buildscript {
 
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'net.hemisoft'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 	maven { url "https://repo.spring.io/snapshot" }
 	maven { url "https://repo.spring.io/milestone" }
@@ -34,7 +37,6 @@ dependencies {
 	compile('org.springframework.integration:spring-integration-http')
 	compile('org.springframework.integration:spring-integration-jpa')
 	compile('org.springframework.integration:spring-integration-websocket')
-//	compile('com.jayway.jsonpath:json-path:2.4.0')
 	compile('org.hibernate:hibernate-envers')
 	compile('org.codehaus.groovy:groovy')
 	compile('net.sf.nomin:nomin:1.1.4')
