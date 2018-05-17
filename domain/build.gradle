@@ -1,0 +1,14 @@
+jar {
+	baseName = 'ccm-domain'
+	version = '${project.version}'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.data:spring-data-envers'
+}
