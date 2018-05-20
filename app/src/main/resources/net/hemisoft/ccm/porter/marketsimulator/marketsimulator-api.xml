@@ -13,6 +13,12 @@
 	
 	<int:bridge input-channel="marketsimulator.output.channel" output-channel="marketsimulator.subscribe.channel" />
 	
-	<int:publish-subscribe-channel id="marketsimulator.subscribe.channel" />
+	<int:publish-subscribe-channel id="marketsimulator.subscribe.channel">
+		<int:interceptors>
+	        <int:wire-tap channel="marketSimulatorDebugLogger"/>
+	    </int:interceptors>
+	</int:publish-subscribe-channel>
+
+	<int:logging-channel-adapter id="marketSimulatorDebugLogger" level="DEBUG"/>
 
 </beans>

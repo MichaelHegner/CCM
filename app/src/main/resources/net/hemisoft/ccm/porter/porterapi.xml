@@ -11,15 +11,29 @@
 
 	<import resource="marketsimulator/marketsimulator-api.xml" />
 	<int:bridge input-channel="marketsimulator.subscribe.channel" output-channel="marketsimulator.porter.subscribe.channel" />
-	<int:publish-subscribe-channel id="marketsimulator.porter.subscribe.channel" />
+	<int:publish-subscribe-channel id="marketsimulator.porter.subscribe.channel">
+		<int:interceptors>
+	        <int:wire-tap channel="porterApiDebugLogger"/>
+	    </int:interceptors>
+	</int:publish-subscribe-channel>
 
 	<import resource="coinmarketcap/coinmarketcap-api.xml" />
 	<int:bridge input-channel="coinmarketcap.subscribe.channel" output-channel="coinmarketcap.porter.subscribe.channel" />
-	<int:publish-subscribe-channel id="coinmarketcap.porter.subscribe.channel" />
+	<int:publish-subscribe-channel id="coinmarketcap.porter.subscribe.channel">
+		<int:interceptors>
+	        <int:wire-tap channel="porterApiDebugLogger"/>
+	    </int:interceptors>
+	</int:publish-subscribe-channel>
 	
 	<import resource="cryptocompare/cryptocompare-api.xml" />
 	<int:bridge input-channel="cryptocompare.subscribe.channel" output-channel="cryptocompare.porter.subscribe.channel" />
-	<int:publish-subscribe-channel id="cryptocompare.porter.subscribe.channel" />
+	<int:publish-subscribe-channel id="cryptocompare.porter.subscribe.channel">
+		<int:interceptors>
+	        <int:wire-tap channel="porterApiDebugLogger"/>
+	    </int:interceptors>
+	</int:publish-subscribe-channel>
 	
+
+	<int:logging-channel-adapter id="porterApiDebugLogger" level="DEBUG"/>
 
 </beans>

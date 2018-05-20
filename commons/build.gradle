@@ -1,0 +1,11 @@
+jar {
+	baseName = 'ccm-commons'
+	version = '${project.version}'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {}

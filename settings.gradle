@@ -1,6 +1,8 @@
 rootProject.name = 'ccm'
 
+include 'commons'
 include 'domain'
+include 'repository'
 include 'app'
 
 rootProject.children.each { it.name = rootProject.name + '-' + it.name }

@@ -1,0 +1,26 @@
+//apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'ccm-repository'
+	version = '${project.version}'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile project(':ccm-commons')
+	compile project(':ccm-domain')
+	
+	compile 	'org.springframework.boot:spring-boot-starter'
+	compile 	'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 	'org.springframework.data:spring-data-envers'
+	compile 	'org.springframework.boot:spring-boot-starter-integration'
+	compile 	'org.springframework.integration:spring-integration-jpa'
+	compile 	'org.hibernate:hibernate-envers'
+	runtime 	'com.h2database:h2'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.mockito:mockito-all:1.10.+'
+}

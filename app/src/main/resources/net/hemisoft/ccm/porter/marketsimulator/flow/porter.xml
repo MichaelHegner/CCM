@@ -4,16 +4,14 @@
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:int-http="http://www.springframework.org/schema/integration/http"
 	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
 	<import resource="_restapi.xml"/>
 	
-	<int:bridge input-channel="marketsimulator.income.channel" 
-				output-channel="marketsimulator.response.channel"
-	>
+	<int:bridge input-channel="marketsimulator.income.channel"  output-channel="marketsimulator.response.channel">
 		<int:poller fixed-rate="1000" />
 	</int:bridge>
 	

@@ -1,6 +1,8 @@
 package net.hemisoft.ccm.stub.coinmarketcap
 
+import net.hemisoft.ccm.domain.CoinOnMarketPlace
 import net.hemisoft.ccm.porter.coinmarketcap.Coin
+import net.hemisoft.ccm.utils.DateUtils
 
 class BitCoinStub {
 	static final String			MARKET_PLACE_NAME	= "coinMarketCap"
@@ -74,5 +76,24 @@ class BitCoinStub {
 		assert coin.changePercent24h 	!= null 
 		assert coin.changePercent7d 	!= null 
 		assert coin.lastUpdateEpoch 	!= null 
+	}
+	
+	static void assertBitcoinValues(CoinOnMarketPlace comp) {
+		assert comp.marketPlace.name	== "coinMarketCap"
+		assert comp.coin.coinId 		== "bitcoin"
+		assert comp.coin.name 			== "Bitcoin"
+		assert comp.coin.symbol 		== "BTC"
+		assert comp.rank 				== 1
+		assert comp.priceUSD 			== 14613.5
+		assert comp.priceBTC 			== 1.0
+		assert comp.volume24hUSD 		== 12079400000.0
+		assert comp.marketCapUSD 		== 245518197535
+		assert comp.availableSupply 	== 16800550.0
+		assert comp.totalSupply 		== 16800550.0
+		assert comp.maxSupply 			== 21000000.0
+		assert comp.changePercent1h 	== 0.75
+		assert comp.changePercent24h 	== 3.50
+		assert comp.changePercent7d 	== -14.25
+		assert comp.lastUpdate 			== DateUtils.convertEpochMillis(1515852262)
 	}
 }
