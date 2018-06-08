@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.ImportResource
 
-import net.hemisoft.ccm.repository.RepositoryConfig
+import net.hemisoft.ccm.backend.repository.RepositoryConfig
 
 @Configuration
 @Import(RepositoryConfig)

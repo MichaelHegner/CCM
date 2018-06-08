@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.repository
+package net.hemisoft.ccm.backend.service
 
 import java.util.stream.Stream
 

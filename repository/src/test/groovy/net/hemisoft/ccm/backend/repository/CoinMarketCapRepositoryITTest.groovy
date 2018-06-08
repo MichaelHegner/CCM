@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.repository
+package net.hemisoft.ccm.backend.repository
 
 import static org.assertj.core.api.Assertions.assertThat
 import static org.junit.Assert.*
@@ -10,22 +10,20 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Import
 import org.springframework.integration.support.MessageBuilder
 import org.springframework.messaging.MessageChannel
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
-import net.hemisoft.ccm.repository.stub.CoinOnMarketPlaceStub
+import net.hemisoft.ccm.backend.BackendConfig
+import net.hemisoft.ccm.backend.repository.stub.CoinOnMarketPlaceStub
+import net.hemisoft.ccm.backend.service.CoinOnMarketPlaceService
 
 
 
 @RunWith(SpringRunner)
-@SpringBootTest
 @DataJpaTest
-@Import(RepositoryConfig)
-@ContextConfiguration("flow/repository.xml")
+@ContextConfiguration(classes=BackendConfig)
 class CoinMarketCapRepositoryITTest {
 	@Autowired @Qualifier("repository.income.channel")
 	MessageChannel requestChannel

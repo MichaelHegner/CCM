@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.repository;
+package net.hemisoft.ccm.backend;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan
@@ -13,10 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import net.hemisoft.ccm.domain.DomainConfig;
 
 @Configuration
-@Import(DomainConfig)
-@EnableTransactionManagement
-@EnableJpaRepositories(repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
-@EnableJpaAuditing
+@ImportResource("classpath:/net/hemisoft/ccm/backend/backend-api.xml")
+@EnableAutoConfiguration
 @ComponentScan
-@ImportResource("classpath:/net/hemisoft/ccm/repository/repositoryapi.xml")
-public class RepositoryConfig {}
+public class BackendConfig {}

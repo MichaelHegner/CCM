@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.repository
+package net.hemisoft.ccm.backend
 
 import static org.assertj.core.api.Assertions.assertThat
 import static org.junit.Assert.*
@@ -6,12 +6,16 @@ import static org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.integration.support.MessageBuilder
+import org.springframework.messaging.MessageChannel
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 
+import net.hemisoft.ccm.backend.repository.stub.CoinOnMarketPlaceStub
+import net.hemisoft.ccm.backend.service.CoinOnMarketPlaceService
 import net.hemisoft.ccm.domain.MarketPlace
-import net.hemisoft.ccm.repository.stub.CoinOnMarketPlaceStub
 
 
 /**
@@ -21,16 +25,17 @@ import net.hemisoft.ccm.repository.stub.CoinOnMarketPlaceStub
  * @author Michael Hegner
  */
 @RunWith(SpringRunner)
-@ContextConfiguration(classes = [RepositoryConfig])
+@ContextConfiguration(classes=BackendConfig)
 @DataJpaTest
-class CoinMarketCapJPAServiceTest {
-	@Autowired CoinOnMarketPlaceService service
+class CoinMarketCapBackendTest {
+	@Autowired 											CoinOnMarketPlaceService 	service
+	@Autowired @Qualifier("repository.income.channel") 	MessageChannel 				channel
 	
 	@Test
 	public void testInsert_ifOneCoinInChannel_thenInsertCoin() {
 		def comp = CoinOnMarketPlaceStub.createBitCoin()
-		service.save(comp)
-				
+		channel.send MessageBuilder.withPayload(comp).build()
+		
 		def comps = service.findAll()
 		assert comps != null
 		assert comps.size() == 1
@@ -42,8 +47,8 @@ class CoinMarketCapJPAServiceTest {
 	public void testInsert_ifTwoDifferentCoinsFromSameMarketInChannel_thenInsertBothCoins() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def ethComp = CoinOnMarketPlaceStub.createEthereumCoin()
-		service.save(bitComp)
-		service.save(ethComp)
+		channel.send MessageBuilder.withPayload(bitComp).build()
+		channel.send MessageBuilder.withPayload(ethComp).build()
 		
 		def comps = service.findAll()
 		assert comps != null
@@ -59,9 +64,8 @@ class CoinMarketCapJPAServiceTest {
 		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin()
 		bitComp2.priceBTC = bitComp2.priceBTC + 10
 		bitComp2.lastUpdate = bitComp2.lastUpdate.plusSeconds(10)
-		
-		service.save(bitComp)
-		service.save(bitComp2)
+		channel.send MessageBuilder.withPayload(bitComp).build()
+		channel.send MessageBuilder.withPayload(bitComp2).build()
 		
 		def comps = service.findAll()
 		assert comps != null
@@ -75,8 +79,8 @@ class CoinMarketCapJPAServiceTest {
 	public void testInsert_ifTwoDifferentCoinsFromDifferentMarketsInChannel_thenInsertBothCoins() {
 		def bitComp = CoinOnMarketPlaceStub.createBitCoin()
 		def ethComp = CoinOnMarketPlaceStub.createEthereumCoin()
-		service.save(bitComp)
-		service.save(ethComp)
+		channel.send MessageBuilder.withPayload(bitComp).build()
+		channel.send MessageBuilder.withPayload(ethComp).build()
 		
 		def comps = service.findAll()
 		assert comps != null
@@ -91,9 +95,8 @@ class CoinMarketCapJPAServiceTest {
 		def bitComp2 = CoinOnMarketPlaceStub.createBitCoin(MarketPlace.newInstance(name: "AnyMarketPlace"))
 		bitComp2.priceBTC = bitComp2.priceBTC + 10
 		bitComp2.lastUpdate = bitComp2.lastUpdate.plusSeconds(10)
-		
-		service.save(bitComp)
-		service.save(bitComp2)
+		channel.send MessageBuilder.withPayload(bitComp).build()
+		channel.send MessageBuilder.withPayload(bitComp2).build()
 		
 		def comps = service.findAll()
 		assert comps != null

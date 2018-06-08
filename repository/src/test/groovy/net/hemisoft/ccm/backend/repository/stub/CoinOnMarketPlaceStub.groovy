@@ -1,4 +1,4 @@
-package net.hemisoft.ccm.repository.stub;
+package net.hemisoft.ccm.backend.repository.stub;
 
 import net.hemisoft.ccm.domain.Coin
 import net.hemisoft.ccm.domain.CoinOnMarketPlace

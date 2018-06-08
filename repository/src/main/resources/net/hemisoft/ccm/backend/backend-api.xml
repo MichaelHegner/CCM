@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:int-jpa="http://www.springframework.org/schema/integration/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/integration/jpa http://www.springframework.org/schema/integration/jpa/spring-integration-jpa-5.0.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
+
+	<int:channel id="repository.income.channel" datatype="net.hemisoft.ccm.domain.CoinOnMarketPlace" />
+	
+	<int:enricher id="coinOnMarketPlace.coinEnricher"
+		input-channel="repository.income.channel"
+		request-channel="internal.coinonmarketplace.coin.enrich.channel"
+		output-channel="internal.coinonmarketplace.coin.enriched.channel"
+		error-channel="cryptocompare.error.channel"
+	>
+		<int:property name="coin" expression="payload"/>
+		<int:transactional/>
+	</int:enricher>
+	
+	<!-- Enrich CoinOnMarketPlace with persistent coin -->
+	<int:channel id="internal.coinonmarketplace.coin.enrich.channel" />
+	<int:service-activator input-channel="internal.coinonmarketplace.coin.enrich.channel" ref="coinService" method="findOrCreateCoin">
+		<int:transactional/>
+	</int:service-activator>
+	
+	<int:channel id="internal.coinonmarketplace.coin.enriched.channel" />
+	
+	<int:enricher id="coinOnMarketPlace.marketPlaceEnricher"
+		input-channel="internal.coinonmarketplace.coin.enriched.channel"
+		request-channel="internal.coinonmarketplace.marketplace.enrich.channel"
+		output-channel="internal.coinonmarketplace.marketplace.enriched.channel"
+		error-channel="cryptocompare.error.channel"
+	>
+		<int:property name="marketPlace" expression="payload"/>
+		<int:transactional/>
+	</int:enricher>
+	
+	<!-- Enrich CoinOnMarketPlace with persistent marketPlace -->
+	<int:channel id="internal.coinonmarketplace.marketplace.enrich.channel" />
+	<int:service-activator input-channel="internal.coinonmarketplace.marketplace.enrich.channel" ref="marketPlaceService" method="findOrCreateMarketPlace">
+		<int:transactional/>
+	</int:service-activator>
+	
+	
+	<int:channel id="cryptocompare.error.channel">
+		<int:interceptors >
+			<int:wire-tap channel="backendWarnLogger"/>
+		</int:interceptors>
+	</int:channel>
+	<int:logging-channel-adapter id="backendWarnLogger" level="WARN" />
+    
+    <int:service-activator input-channel="internal.coinonmarketplace.marketplace.enriched.channel" ref="coinOnMarketPlaceServiceImpl" method="save" />
+
+</beans>
