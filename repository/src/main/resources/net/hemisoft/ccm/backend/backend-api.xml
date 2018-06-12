@@ -44,6 +44,13 @@
 		<int:transactional/>
 	</int:service-activator>
 	
+    <int:service-activator input-channel="internal.coinonmarketplace.marketplace.enriched.channel" output-channel="repository.comp.saved.subscribe.channel" 
+    	ref="coinOnMarketPlaceServiceImpl" method="save" 
+    />
+	
+	<!-- End Channels ... -->
+	
+	<int:publish-subscribe-channel id="repository.comp.saved.subscribe.channel" />
 	
 	<int:channel id="cryptocompare.error.channel">
 		<int:interceptors >
@@ -52,6 +59,5 @@
 	</int:channel>
 	<int:logging-channel-adapter id="backendWarnLogger" level="WARN" />
     
-    <int:service-activator input-channel="internal.coinonmarketplace.marketplace.enriched.channel" ref="coinOnMarketPlaceServiceImpl" method="save" />
 
 </beans>

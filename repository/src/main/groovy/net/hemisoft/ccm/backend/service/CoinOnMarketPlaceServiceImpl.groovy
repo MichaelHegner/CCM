@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service
 
 import net.hemisoft.ccm.backend.repository.CoinsOnMarketPlaceRepository
 import net.hemisoft.ccm.domain.CoinOnMarketPlace
+import net.hemisoft.ccm.utils.AssertionUtils
 
 @Service
 @Transactional
@@ -18,7 +19,8 @@ class CoinOnMarketPlaceServiceImpl implements CoinOnMarketPlaceService {
 		this.repository = repository;
 	}
 
-	void save(CoinOnMarketPlace comp) {
+	CoinOnMarketPlace save(CoinOnMarketPlace comp) {
+		AssertionUtils.assertNotNull(comp)
 		def dbComp = repository.findByCoinAndMarketPlace comp.coin, comp.marketPlace
 		
 		if(null == dbComp) {
@@ -38,7 +40,7 @@ class CoinOnMarketPlaceServiceImpl implements CoinOnMarketPlaceService {
 	}
 
 	@Override
-	public Iterable<CoinOnMarketPlace> findAll() {
+	Iterable<CoinOnMarketPlace> findAll() {
 		repository.findAll()
 	}
 }
